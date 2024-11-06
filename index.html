@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Em breve</title>
+		<link rel="icon" href="favicon.ico" type="image/x-icon" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			/* Centraliza a logo e o texto */
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				min-height: 100vh;
+				margin: 0;
+				font-family: Arial, sans-serif;
+				background-color: #ffffff; /* Fundo branco */
+				color: #333;
+			}
+
+			.logo-container {
+				position: relative;
+				display: inline-block;
+				text-align: center;
+			}
+
+			.logo {
+				max-width: 200px;
+				margin-bottom: 20px;
+			}
+
+			/* Shine Effect */
+			.logo-container i {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 15%;
+				height: 100%;
+				opacity: 0;
+				transform: skew(-10deg, 0deg);
+				background: linear-gradient(
+					to right,
+					rgba(255, 255, 255, 0) 0%,
+					rgba(255, 255, 255, 0.03) 1%,
+					rgba(255, 255, 255, 0.6) 30%,
+					rgba(255, 255, 255, 0.85) 50%,
+					rgba(255, 255, 255, 0.85) 70%,
+					rgba(255, 255, 255, 0.85) 71%,
+					rgba(255, 255, 255, 0) 100%
+				);
+				animation: move 2s infinite;
+			}
+
+			@keyframes move {
+				0% {
+					left: 0;
+					opacity: 0;
+				}
+				5% {
+					opacity: 0;
+				}
+				48% {
+					opacity: 0.2;
+				}
+				80% {
+					opacity: 0;
+				}
+				100% {
+					left: 100%;
+				}
+			}
+
+			/* Efeito de digitação */
+			.typing-demo {
+				width: 6.5ch;
+				animation: typing 2s steps(7), blink 0.5s step-end infinite alternate;
+				white-space: nowrap;
+				overflow: hidden;
+				border-right: 3px solid;
+				font-family: "Inter", sans-serif;
+				font-size: 1.5em;
+			}
+
+			@keyframes typing {
+				from {
+					width: 0;
+				}
+			}
+
+			@keyframes blink {
+				50% {
+					border-color: transparent;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logo-container">
+			<!-- Substitua "logo-diretoria.png" pelo caminho para sua logomarca -->
+			<img src="logo-diretoria.png" alt="Logomarca" class="logo" />
+			<i></i>
+		</div>
+		<div class="typing-demo">vem aí...</div>
+	</body>
+</html>
