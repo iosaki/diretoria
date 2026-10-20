@@ -79,14 +79,10 @@
         position: absolute;
         z-index: -1;
         inset: 0;
-        background-image:
-          linear-gradient(rgba(229, 211, 194, 0.095) 1px, transparent 1px),
-          linear-gradient(
-            90deg,
-            rgba(229, 211, 194, 0.095) 1px,
-            transparent 1px
-          );
-        background-size: 22px 22px;
+        background-image: url("linha-pontilhada.svg");
+        background-size: 24px 100%;
+        background-repeat: repeat-x;
+        filter: blur(.65px);
         content: "";
         mask-image: linear-gradient(
           to bottom,
