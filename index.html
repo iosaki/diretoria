@@ -748,7 +748,7 @@
             <span></span><span></span>
           </button>
           <nav class="nav" id="site-nav" aria-label="Navegação principal">
-            <a href="#inicio">Início</a><a href="#manifesto">Manifesto</a
+            <a href="#inicio">Início</a><a href="manifesto.html">Manifesto</a
             ><a href="jogos.html">Jogos</a
             ><a href="loja.html" class="nav-cta">Loja oficial</a
             >
@@ -760,7 +760,6 @@
           <div class="mosaic-grid" id="mosaic-grid" role="img" aria-label="Fotos e vídeos da Diretoria em quadra"></div>
         </div>
       </section>
-      <section class="manifesto" id="manifesto"><p>Amizade, cervejinha e futebol — exatamente nessa ordem.</p></section>
     </main>
     <footer class="site-footer" id="contato">
       <div class="footer-main">
@@ -777,7 +776,7 @@
         <div class="footer-col">
           <h2>Navegue</h2>
           <nav class="footer-links" aria-label="Links do rodapé">
-            <a href="#inicio">Início</a><a href="#manifesto">Manifesto</a>
+            <a href="#inicio">Início</a><a href="manifesto.html">Manifesto</a>
             <a href="jogos.html">Jogos</a>
             <a href="loja.html">Loja oficial</a>
           </nav>
@@ -800,17 +799,17 @@
     <script>
       const mosaicGrid = document.querySelector("#mosaic-grid");
       const mosaicMedia = [
-        { src: "mosaico/001.mp4", type: "video" },
-        { src: "mosaico/002.mp4", type: "video" },
-        { src: "mosaico/003.mp4", type: "video" },
-        { src: "mosaico/004.mp4", type: "video" },
-        { src: "mosaico/005.mp4", type: "video" },
-        { src: "mosaico/006.mp4", type: "video" },
-        { src: "mosaico/007.mp4", type: "video" },
         { src: "mosaico/008.mp4", type: "video" },
-        { src: "mosaico/009.mp4", type: "video" },
-        { src: "mosaico/010.MP4", type: "video" },
+        { src: "mosaico/003.mp4", type: "video" },
         { src: "mosaico/011.mp4", type: "video" },
+        { src: "mosaico/005.mp4", type: "video" },
+        { src: "mosaico/001.mp4", type: "video" },
+        { src: "mosaico/009.mp4", type: "video" },
+        { src: "mosaico/004.mp4", type: "video" },
+        { src: "mosaico/010.MP4", type: "video" },
+        { src: "mosaico/006.mp4", type: "video" },
+        { src: "mosaico/002.mp4", type: "video" },
+        { src: "mosaico/007.mp4", type: "video" },
       ];
       const shuffleMosaicItems = (items) => {
         const shuffled = [...items];
@@ -854,6 +853,7 @@
             if (video.isConnected) tryPlay();
           };
           video.addEventListener("loadedmetadata", () => {
+            video.currentTime = 0;
             console.info(`Metadados carregados: ${item.src}`, `${video.videoWidth}x${video.videoHeight}`);
           }, { once: true });
           video.addEventListener("loadeddata", startPlayback);
