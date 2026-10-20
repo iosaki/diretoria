@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111111" />
+    <meta
+      name="description"
+      content="Conheça a loja oficial da Diretoria Futsal."
+    />
+    <title>Loja oficial — Diretoria Futsal</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --red: #e91e27;
+        --ink: #111;
+        --paper: #f5f3ef;
+        --display: "Barlow Condensed", Impact, sans-serif;
+        --body: "DM Sans", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: #fff;
+        font-family: var(--body);
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .skip-link {
+        position: fixed;
+        z-index: 10;
+        top: 12px;
+        left: 12px;
+        transform: translateY(-150%);
+        padding: 12px 16px;
+        background: #fff;
+        color: var(--ink);
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+      .site-header {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: 86px;
+        align-items: center;
+        padding: 0 clamp(24px, 5vw, 76px);
+      }
+      .brand img {
+        display: block;
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+      }
+      .nav {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        gap: clamp(22px, 3.3vw, 52px);
+        margin-left: clamp(24px, 3.5vw, 52px);
+      }
+      .nav a {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav a:hover,
+      .nav a:focus-visible,
+      .nav a[aria-current="page"] {
+        color: #fff;
+      }
+      .nav .nav-cta {
+        margin-left: 0;
+      }
+      .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        background: transparent;
+        cursor: pointer;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 18px;
+        height: 1px;
+        margin: 5px auto;
+        background: #fff;
+        transition: transform 0.2s;
+      }
+      .shop-hero {
+        position: relative;
+        display: grid;
+        min-height: max(620px, 88svh);
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 4vw;
+        overflow: hidden;
+        padding: 120px clamp(24px, 8vw, 130px) 72px;
+        isolation: isolate;
+        background: #0c090c;
+      }
+      .shop-hero::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(229, 211, 194, 0.095) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(229, 211, 194, 0.095) 1px,
+            transparent 1px
+          );
+        background-size: 22px 22px;
+        content: "";
+        mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.35),
+          #000 18%,
+          #000 86%,
+          transparent
+        );
+      }
+      .shop-copy {
+        max-width: 590px;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 20px;
+        color: #f3c6a8;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .eyebrow::before {
+        width: 24px;
+        height: 2px;
+        background: var(--red);
+        content: "";
+      }
+      h1 {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(66px, 10vw, 142px);
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.78;
+        text-transform: uppercase;
+      }
+      h1 span {
+        display: block;
+        color: var(--red);
+      }
+      .shop-copy > p:not(.eyebrow) {
+        max-width: 410px;
+        margin: 28px 0 0;
+        color: #c5c0bc;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+      .shop-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px 24px;
+        margin-top: 34px;
+      }
+      .shop-button {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        background: var(--red);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .shop-button:hover {
+        transform: translateY(-2px);
+        background: #c9141d;
+      }
+      .shop-back {
+        color: #d1cbc6;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .shop-back:hover {
+        color: #fff;
+      }
+      .product-visual {
+        position: relative;
+        display: grid;
+        min-height: min(64vh, 620px);
+        place-items: center;
+      }
+      .product-visual::before {
+        position: absolute;
+        width: min(36vw, 440px);
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 50%;
+        content: "";
+      }
+      .product-visual::after {
+        position: absolute;
+        width: min(29vw, 350px);
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+        content: "";
+      }
+      .product-visual img {
+        position: relative;
+        z-index: 1;
+        width: min(30vw, 360px);
+        max-height: 58vh;
+        object-fit: contain;
+        filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.45));
+      }
+      .product-label {
+        position: absolute;
+        z-index: 2;
+        right: 2%;
+        bottom: 10%;
+        padding: 12px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        background: rgba(12, 9, 12, 0.76);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .shop-note {
+        padding: 20px 24px;
+        border-top: 1px solid #333;
+        background: #151515;
+        color: #dfbd9d;
+        text-align: center;
+        font-family: var(--display);
+        font-size: clamp(18px, 2.8vw, 25px);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .shop-products {
+        padding: 82px clamp(24px, 6vw, 92px) 96px;
+        background: #111;
+      }
+      .shop-products-inner {
+        max-width: 1392px;
+        margin: 0 auto;
+      }
+      .products-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 30px;
+      }
+      .products-heading .eyebrow {
+        margin-bottom: 10px;
+        color: #aaa;
+      }
+      .products-heading h2 {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(42px, 6vw, 72px);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+      .products-heading > p {
+        max-width: 280px;
+        margin: 0;
+        color: #aaa;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .product-card {
+        min-width: 0;
+        border: 1px solid #343034;
+        background: #171517;
+      }
+      .product-card.manto-one {
+        --product-front: url("loja/camisa-principal.png");
+        --product-back: url("loja/manto-um-verso.png");
+      }
+      .product-card.manto-two {
+        --product-front: url("loja/manto-dois.png");
+        --product-back: url("loja/manto-dois-verso.png");
+      }
+      .product-card.manto-three {
+        --product-front: url("loja/manto-tres.png");
+        --product-back: url("loja/manto-tres-verso.png");
+      }
+      .product-card.manto-four {
+        --product-front: url("loja/manto-quatro.png");
+        --product-back: url("loja/manto-quatro-verso.png");
+      }
+      .product-card-visual {
+        position: relative;
+        display: grid;
+        aspect-ratio: 1 / 1;
+        place-items: center;
+        overflow: hidden;
+        background: #1c191c;
+      }
+      .product-card-visual img {
+        display: none;
+      }
+      .product-card-visual::before,
+      .product-card-visual::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background-position: center;
+        background-size: 84%;
+        background-repeat: no-repeat;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+      }
+      .product-card-visual::before { background-image: var(--product-front); }
+      .product-card-visual::after { background-image: var(--product-back); opacity: 0; }
+      .product-card.manto-three .product-card-visual::before { background-size: 90% 92%; }
+      .product-card:hover .product-card-visual::after,
+      .product-card:focus-within .product-card-visual::after {
+        opacity: 1;
+      }
+      .product-card:hover .product-card-visual::before,
+      .product-card:focus-within .product-card-visual::before { opacity: 0; }
+      .product-card-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 17px 18px 19px;
+      }
+      .product-card-info p {
+        margin: 0;
+      }
+      .product-kind {
+        margin-bottom: 5px !important;
+        color: #aaa;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .product-name {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .product-contact {
+        flex: 0 0 auto;
+        color: #fff;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .product-contact:hover {
+        color: var(--red);
+      }
+      .site-footer {
+        padding: 30px clamp(24px, 6vw, 92px) 18px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .footer-main {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+        align-items: start;
+        gap: 30px;
+        max-width: 1392px;
+        margin: 0 auto;
+        padding-bottom: 26px;
+      }
+      .footer-brand-block {
+        align-self: center;
+      }
+      .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .footer-brand img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+      }
+      .brand-name {
+        color: var(--ink);
+        font-size: 23px;
+      }
+      .brand-name small {
+        display: block;
+        margin-top: 5px;
+        color: #77736e;
+        font-family: var(--body);
+        font-size: 8px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+      }
+      .footer-col h2 {
+        margin: 4px 0 12px;
+        color: #88837e;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .footer-links {
+        display: grid;
+        gap: 9px;
+      }
+      .footer-links a,
+      .footer-contact a {
+        width: fit-content;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .footer-links a:hover,
+      .footer-contact a:hover {
+        color: var(--red);
+      }
+      .footer-bottom {
+        max-width: 1392px;
+        margin: 0 auto;
+        padding-top: 14px;
+        border-top: 1px solid #d8d5d0;
+        color: #77736e;
+        font-size: 10px;
+        text-align: center;
+      }
+      .footer-bottom p {
+        margin: 0;
+      }
+      @media (max-width: 780px) {
+        .site-header {
+          height: 76px;
+          padding: 0 22px;
+        }
+        .brand img {
+          width: 46px;
+          height: 46px;
+        }
+        .menu-toggle {
+          display: block;
+          position: relative;
+          z-index: 7;
+          margin-left: auto;
+        }
+        .menu-toggle[aria-expanded="true"] span:first-child {
+          transform: translateY(3px) rotate(45deg);
+        }
+        .menu-toggle[aria-expanded="true"] span:last-child {
+          transform: translateY(-3px) rotate(-45deg);
+        }
+        .nav {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          display: none;
+          align-items: stretch;
+          gap: 0;
+          margin: 0;
+          padding: 86px 24px 25px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          background: rgba(17, 17, 17, 0.97);
+        }
+        .nav.is-open {
+          display: flex;
+          flex-direction: column;
+        }
+        .nav a {
+          padding: 15px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .nav .nav-cta {
+          margin: 0;
+        }
+        .shop-hero {
+          min-height: 0;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          padding: 120px 28px 54px;
+        }
+        h1 {
+          font-size: clamp(60px, 10vw, 92px);
+        }
+        .product-visual {
+          min-height: 58vw;
+        }
+        .product-visual img {
+          width: min(36vw, 285px);
+        }
+        .product-visual::before {
+          width: 44vw;
+        }
+        .product-visual::after {
+          width: 35vw;
+        }
+        .shop-products {
+          padding: 64px 24px 72px;
+        }
+        .products-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .products-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .footer-main {
+          gap: 22px;
+        }
+      }
+      @media (max-width: 520px) {
+        .shop-hero {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding: 118px 24px 38px;
+        }
+        h1 {
+          font-size: clamp(62px, 17vw, 88px);
+        }
+        .shop-copy > p:not(.eyebrow) {
+          margin-top: 20px;
+          font-size: 14px;
+        }
+        .shop-actions {
+          margin-top: 24px;
+        }
+        .product-visual {
+          min-height: 82vw;
+        }
+        .product-visual img {
+          width: min(58vw, 255px);
+          max-height: 44vh;
+        }
+        .product-visual::before {
+          width: 70vw;
+        }
+        .product-visual::after {
+          width: 56vw;
+        }
+        .product-label {
+          right: 3%;
+          bottom: 5%;
+        }
+        .product-card-info {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 12px;
+          padding: 14px;
+        }
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+          gap: 22px 18px;
+          padding-bottom: 20px;
+        }
+        .footer-brand-block {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="brand" href="index.html#inicio" aria-label="Diretoria — início"
+        ><img src="logo-diretoria.png" alt=""
+      /></a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <span></span><span></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Navegação principal">
+        <a href="index.html#inicio">Início</a>
+        <a href="index.html#manifesto">Manifesto</a>
+        <a href="jogos.html">Jogos</a>
+        <a href="loja.html" class="nav-cta" aria-current="page">Loja oficial</a>
+      </nav>
+    </header>
+    <main id="conteudo">
+      <section class="shop-hero" aria-labelledby="shop-title">
+        <div class="shop-copy">
+          <p class="eyebrow">Diretoria · loja oficial</p>
+          <h1 id="shop-title">Vista a <span>Diretoria.</span></h1>
+          <p>
+            A camisa do time carrega as cores, a história e a energia de quem
+            joga junto.
+          </p>
+        </div>
+        <div class="product-visual" aria-label="Camisa vermelha da Diretoria">
+          <img
+            src="uniform-diretoria.png"
+            alt="Camisa vermelha listrada do time Diretoria"
+          />
+          <span class="product-label">Futsal feminino · Diretoria</span>
+        </div>
+      </section>
+      <section class="shop-products" aria-labelledby="products-title">
+        <div class="shop-products-inner">
+          <div class="products-heading">
+            <div>
+              <p class="eyebrow">Vista as cores</p>
+              <h2 id="products-title">Produtos da loja oficial</h2>
+            </div>
+          </div>
+          <div class="products-grid">
+            <article class="product-card manto-one">
+              <div class="product-card-visual" role="img" aria-label="Manto I, uniforme oficial da Diretoria"></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-name">Manto I</p>
+                </div>
+                <a class="product-contact" href="mailto:oi@diretoriaffc.com.br?subject=Manto%20I">Consultar ↗</a>
+              </div>
+            </article>
+            <article class="product-card manto-two">
+              <div class="product-card-visual" role="img" aria-label="Manto II, uniforme oficial da Diretoria"></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-name">Manto II</p>
+                </div>
+                <a class="product-contact" href="mailto:oi@diretoriaffc.com.br?subject=Manto%20II">Consultar ↗</a>
+              </div>
+            </article>
+            <article class="product-card manto-three">
+              <div class="product-card-visual" role="img" aria-label="Manto III, uniforme oficial da Diretoria"></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-name">Manto III</p>
+                </div>
+                <a class="product-contact" href="mailto:oi@diretoriaffc.com.br?subject=Manto%20III">Consultar ↗</a>
+              </div>
+            </article>
+            <article class="product-card manto-four">
+              <div class="product-card-visual" role="img" aria-label="Manto IV, uniforme oficial da Diretoria"></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-name">Manto IV</p>
+                </div>
+                <a class="product-contact" href="mailto:oi@diretoriaffc.com.br?subject=Manto%20IV">Consultar ↗</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <div class="shop-note">
+        Amizade, cervejinha e futebol — exatamente nessa ordem.
+      </div>
+    </main>
+    <footer class="site-footer" id="contato">
+      <div class="footer-main">
+        <div class="footer-brand-block">
+          <a
+            class="footer-brand"
+            href="index.html#inicio"
+            aria-label="Diretoria — voltar ao início"
+            ><img src="logo-diretoria.png" alt="" /><span class="brand-name"
+              >Diretoria<small>Futsal feminino · desde 2022</small></span
+            ></a
+          >
+        </div>
+        <div class="footer-col">
+          <h2>Navegue</h2>
+          <nav class="footer-links" aria-label="Links do rodapé">
+            <a href="index.html#inicio">Início</a
+            ><a href="index.html#manifesto">Manifesto</a
+            ><a href="jogos.html">Jogos</a><a href="loja.html">Loja oficial</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h2>Contato</h2>
+          <div class="footer-contact">
+            <a href="mailto:oi@diretoriaffc.com.br">oi@diretoriaffc.com.br</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h2>Redes sociais</h2>
+          <div class="footer-links">
+            <a
+              href="https://instagram.com/diretoria.ffc/"
+              target="_blank"
+              rel="noreferrer"
+              >Instagram ↗</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Diretoria Futsal. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+    <script>
+      const menuButton = document.querySelector(".menu-toggle");
+      const navigation = document.querySelector("#site-nav");
+      menuButton.addEventListener("click", () => {
+        const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+        menuButton.setAttribute("aria-expanded", String(!isOpen));
+        menuButton.setAttribute(
+          "aria-label",
+          isOpen ? "Abrir menu" : "Fechar menu",
+        );
+        navigation.classList.toggle("is-open", !isOpen);
+      });
+      navigation.querySelectorAll("a").forEach((link) =>
+        link.addEventListener("click", () => {
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.setAttribute("aria-label", "Abrir menu");
+          navigation.classList.remove("is-open");
+        }),
+      );
+    </script>
+  </body>
+</html>
