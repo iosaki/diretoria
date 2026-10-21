@@ -944,8 +944,11 @@
               name="whatsapp"
               type="tel"
               autocomplete="tel"
+              inputmode="numeric"
               required
-              maxlength="30"
+              maxlength="15"
+              pattern="\(\d{2}\) \d{5}-\d{4}"
+              title="Use o formato (11) 99999-9999"
               placeholder="(11) 99999-9999"
           /></label>
           <label class="jersey-name-field" hidden
@@ -1050,6 +1053,32 @@
         "https://script.google.com/macros/s/AKfycbyvuEW9AY4pvD3dalEk9B-qMB1yUYbkma5zc-n7RBoymQRnKol372Y7NpqeegGxaID4Ug/exec";
       const interestDialog = document.querySelector(".interest-dialog");
       const interestForm = document.querySelector(".interest-form");
+      const whatsappField = interestForm.elements.whatsapp;
+      whatsappField.addEventListener("input", () => {
+        const rawValue = whatsappField.value;
+        const caret = whatsappField.selectionStart ?? rawValue.length;
+        const digitsBeforeCaret = rawValue.slice(0, caret).replace(/\D/g, "").length;
+        let digits = rawValue.replace(/\D/g, "");
+        if ((digits.length === 12 || digits.length === 13) && digits.startsWith("55")) {
+          digits = digits.slice(2);
+        }
+        digits = digits.slice(0, 11);
+        let formatted = digits;
+        if (digits.length > 2) {
+          formatted = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}`;
+          if (digits.length > 7) formatted += `-${digits.slice(7)}`;
+        } else if (digits.length) {
+          formatted = `(${digits}`;
+        }
+        whatsappField.value = formatted;
+        let nextCaret = 0;
+        let countedDigits = 0;
+        while (nextCaret < formatted.length && countedDigits < digitsBeforeCaret) {
+          if (/\d/.test(formatted[nextCaret])) countedDigits += 1;
+          nextCaret += 1;
+        }
+        whatsappField.setSelectionRange(nextCaret, nextCaret);
+      });
       const productField = interestForm.elements.product;
       const jerseyNameField = document.querySelector(".jersey-name-field");
       const jerseyNameInput = interestForm.elements.jerseyName;
