@@ -14,7 +14,7 @@ O site é estático, então este Apps Script faz a ponte com a planilha. O arqui
 
 Se o App da Web já estiver implantado, ao atualizar `Code.gs` use **Implantar → Gerenciar implantações → Editar → Nova versão → Implantar**. A URL `/exec` existente permanece a mesma.
 
-Ao executar `setup()` novamente, o script adiciona o cabeçalho **Nome na camisa** na coluna G da aba **Lista de interesse**, preservando as linhas existentes. O nome de personalização é obrigatório nos mantos e não é solicitado para os demais itens.
+Ao executar `setup()` novamente, o script adiciona os cabeçalhos **Nome na camisa** na coluna G e **ID do envio** na coluna H da aba **Lista de interesse**, preservando as linhas existentes. A coluna H fica oculta e serve apenas para o site confirmar que a resposta foi gravada. O nome de personalização é obrigatório nos mantos e não é solicitado para os demais itens.
 
 A aba **Lista de interesse** contém nome e WhatsApp; mantenha a planilha restrita à equipe. A página pública recebe apenas total de pessoas, unidades e mínimo de cada produto. Para contabilizar uma pessoa uma vez por produto, a planilha agrupa pelo WhatsApp normalizado; quantidades de envios diferentes são somadas.
 

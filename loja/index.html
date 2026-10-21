@@ -1070,7 +1070,7 @@
     <script>
       // URL gerada ao implantar o Apps Script como Web App.
       const INTEREST_ENDPOINT =
-        "https://script.google.com/macros/s/AKfycbxlPWXesNGvSVyCFanJDhhvsgTJLKUTR9nEhPIRNdM5ujgv1vvN-RSpAyo3CJ24yJft/exec";
+        "https://script.google.com/macros/s/AKfycbw0SjhwUgl6HTj0UN8eQGiP7ynjqzBXaBhBPOhgfyZdJje-VTnGiKEHOzxFwVwIcL77/exec";
       const interestDialog = document.querySelector(".interest-dialog");
       const interestForm = document.querySelector(".interest-form");
       const productField = interestForm.elements.product;
@@ -1126,32 +1126,43 @@
       interestDialog.addEventListener("click", (event) => {
         if (event.target === interestDialog) interestDialog.close();
       });
-      window.addEventListener("message", (event) => {
-        let origin = "";
-        try {
-          origin = new URL(event.origin).hostname;
-        } catch {
+      function checkSubmissionStatus(requestId, attempt = 0) {
+        if (requestId !== pendingRequestId) return;
+        if (attempt >= 12) {
+          pendingRequestId = "";
+          interestForm.querySelector("[type=submit]").disabled = false;
+          interestStatus.textContent =
+            "Não conseguimos confirmar o envio. Confira a planilha antes de tentar novamente.";
+          interestStatus.dataset.state = "error";
           return;
         }
-        const trustedOrigin =
-          origin === "script.google.com" ||
-          origin === "script.googleusercontent.com" ||
-          origin.endsWith(".script.googleusercontent.com");
-        if (
-          !trustedOrigin ||
-          event.data?.type !== "diretoria-interest" ||
-          event.data?.requestId !== pendingRequestId
-        )
-          return;
-        pendingRequestId = "";
-        const submitButton = interestForm.querySelector("[type=submit]");
-        submitButton.disabled = false;
-        interestStatus.textContent = event.data.ok
-          ? "Interesse registrado. Obrigada!"
-          : "Não foi possível registrar agora. Confira os dados e tente novamente.";
-        interestStatus.dataset.state = event.data.ok ? "success" : "error";
-        if (event.data.ok) interestForm.reset();
-      });
+        const callback = `interestStatusCallback${Date.now()}${attempt}`;
+        const script = document.createElement("script");
+        let completed = false;
+        const finishAttempt = (received) => {
+          if (completed) return;
+          completed = true;
+          clearTimeout(timeout);
+          script.remove();
+          delete window[callback];
+          if (requestId !== pendingRequestId) return;
+          if (received) {
+            pendingRequestId = "";
+            interestForm.querySelector("[type=submit]").disabled = false;
+            interestStatus.textContent = "Interesse registrado. Obrigada!";
+            interestStatus.dataset.state = "success";
+            interestForm.reset();
+            loadInterestTotals();
+            return;
+          }
+          setTimeout(() => checkSubmissionStatus(requestId, attempt + 1), 700);
+        };
+        window[callback] = (result) => finishAttempt(Boolean(result?.received));
+        script.onerror = () => finishAttempt(false);
+        script.src = `${INTEREST_ENDPOINT}?action=status&requestId=${encodeURIComponent(requestId)}&callback=${callback}`;
+        const timeout = setTimeout(() => finishAttempt(false), 2500);
+        document.head.append(script);
+      }
       interestForm.addEventListener("submit", (event) => {
         event.preventDefault();
         if (
@@ -1166,7 +1177,8 @@
         }
         const submitButton = interestForm.querySelector("[type=submit]");
         submitButton.disabled = true;
-        interestStatus.textContent = "Enviando…";
+        interestStatus.textContent =
+          "Enviando e aguardando confirmação da planilha…";
         interestStatus.removeAttribute("data-state");
         pendingRequestId = crypto.randomUUID();
         interestForm.elements.requestId.value = pendingRequestId;
@@ -1174,6 +1186,7 @@
         interestForm.method = "post";
         interestForm.target = "interest-submit-frame";
         interestForm.submit();
+        checkSubmissionStatus(pendingRequestId);
       });
       function loadInterestTotals() {
         if (

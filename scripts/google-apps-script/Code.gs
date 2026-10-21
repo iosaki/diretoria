@@ -31,12 +31,23 @@ function setup() {
     requests.getRange(1, 7).setValue("Nome na camisa");
     requests.autoResizeColumn(7);
   }
+  if (requests.getLastColumn() < 8 || requests.getRange(1, 8).getValue() !== "ID do envio") {
+    requests.getRange(1, 8).setValue("ID do envio");
+    requests.hideColumns(8);
+  }
   return "Abas prontas. Preencha os mínimos de fabricação na aba Metas da loja.";
 }
 
 function doGet(event) {
-  const callback = String(event.parameter.callback || "");
-  if (!/^interestCallback\d+$/.test(callback) || event.parameter.action !== "totals") {
+  const parameters = event.parameter || {};
+  const callback = String(parameters.callback || "");
+  if (parameters.action === "status" && /^interestStatusCallback\d+$/.test(callback)) {
+    const requestId = String(parameters.requestId || "");
+    const result = { received: isRequestSaved_(requestId) };
+    return ContentService.createTextOutput(`${callback}(${JSON.stringify(result)});`)
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+  if (!/^interestCallback\d+$/.test(callback) || parameters.action !== "totals") {
     return ContentService.createTextOutput("Requisição inválida.");
   }
   const totals = getTotals_();
@@ -54,6 +65,7 @@ function doPost(event) {
     const size = clean_(event.parameter.size, 20);
     const jerseyName = clean_(event.parameter.jerseyName, 30);
     const quantity = Number(event.parameter.quantity);
+    if (!/^[\da-f-]{36}$/i.test(requestId)) throw new Error("ID do envio inválido");
     if (!name || !whatsapp || !CONFIG.products.includes(product) || !Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
       throw new Error("Dados inválidos");
     }
@@ -64,7 +76,7 @@ function doPost(event) {
     const spreadsheet = SpreadsheetApp.openById(CONFIG.spreadsheetId);
     const sheet = spreadsheet.getSheetByName(CONFIG.requestsSheet);
     if (!sheet) throw new Error("Execute setup primeiro");
-    sheet.appendRow([new Date(), name, whatsapp, product, size, quantity, isJersey ? jerseyName : ""]);
+    sheet.appendRow([new Date(), name, whatsapp, product, size, quantity, isJersey ? jerseyName : "", requestId]);
     ok = true;
   } catch (error) {
     console.error(error);
@@ -100,6 +112,16 @@ function getTotals_() {
     });
   }
   return totals;
+}
+
+function isRequestSaved_(requestId) {
+  if (!/^[\da-f-]{36}$/i.test(requestId)) return false;
+  const sheet = SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheetByName(CONFIG.requestsSheet);
+  if (!sheet || sheet.getLastRow() < 2 || sheet.getLastColumn() < 8) return false;
+  return Boolean(sheet.getRange(2, 8, sheet.getLastRow() - 1, 1)
+    .createTextFinder(requestId)
+    .matchEntireCell(true)
+    .findNext());
 }
 
 function clean_(value, maxLength) {
