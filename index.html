@@ -504,6 +504,7 @@
       .mosaic-card video {
         opacity: 0;
         transition: opacity 0.25s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+        -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
       }
       .mosaic-card video.is-ready {
@@ -1153,35 +1154,39 @@
             ? 6
             : 10;
       let mosaicColumnCount = null;
-      const mosaicNearViewport = new Set();
+      const mosaicVisibleVideos = new Set();
       function syncMosaicPlayback() {
         if (document.hidden) {
-          mosaicNearViewport.forEach((video) => video.pause());
+          mosaicVisibleVideos.forEach((video) => video.pause());
           return;
         }
-        const viewportVideos = [...mosaicNearViewport]
-          .filter((video) => {
-            const rect = video.getBoundingClientRect();
-            return rect.bottom > 0 && rect.top < window.innerHeight && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
-          })
-          .sort((a, b) => {
+        const visibleVideos = [...mosaicVisibleVideos].filter(
+          (video) => video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA,
+        );
+        const playbackLimit = mosaicColumnCount === 4 ? 4 : mosaicColumnCount === 6 ? 6 : 10;
+        const playingVideos = visibleVideos.filter((video) => !video.paused);
+        const prioritizedVideos = [
+          ...playingVideos,
+          ...visibleVideos.filter((video) => video.paused).sort((a, b) => {
             const center = window.innerHeight / 2;
             const aRect = a.getBoundingClientRect();
             const bRect = b.getBoundingClientRect();
             return Math.abs((aRect.top + aRect.bottom) / 2 - center) - Math.abs((bRect.top + bRect.bottom) / 2 - center);
-          });
-        const playbackLimit = mosaicColumnCount === 4 ? 4 : mosaicColumnCount === 6 ? 6 : 10;
-        const playingVideos = new Set(viewportVideos.slice(0, playbackLimit));
-        mosaicNearViewport.forEach((video) => {
-          if (playingVideos.has(video)) video.play().catch(() => {});
-          else video.pause();
+          }),
+        ].slice(0, playbackLimit);
+        const videosToPlay = new Set(prioritizedVideos);
+        mosaicVisibleVideos.forEach((video) => {
+          if (videosToPlay.has(video)) {
+            if (video.paused) video.play().catch(() => {});
+          } else if (!video.paused) {
+            video.pause();
+          }
         });
       }
-      const mosaicObserver = new IntersectionObserver(
+      const mosaicLoadObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach(({ target: video, isIntersecting }) => {
             if (isIntersecting) {
-              mosaicNearViewport.add(video);
               if (!video.src) {
                 video.src = video.dataset.src;
                 video.preload = "auto";
@@ -1190,14 +1195,20 @@
               if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
                 video.classList.add("is-ready");
               }
-            } else {
-              mosaicNearViewport.delete(video);
-              video.pause();
             }
+          });
+        },
+        { rootMargin: "500px 0px", threshold: 0.01 },
+      );
+      const mosaicVisibilityObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(({ target: video, isIntersecting }) => {
+            if (isIntersecting) mosaicVisibleVideos.add(video);
+            else mosaicVisibleVideos.delete(video);
           });
           syncMosaicPlayback();
         },
-        { rootMargin: "220px 0px", threshold: 0.01 },
+        { threshold: 0.01 },
       );
       const shuffleMosaicItems = (items) => {
         const shuffled = [...items];
@@ -1215,8 +1226,9 @@
         const columnCount = getMosaicColumnCount();
         if (columnCount === mosaicColumnCount) return;
         mosaicColumnCount = columnCount;
-        mosaicObserver.disconnect();
-        mosaicNearViewport.clear();
+        mosaicLoadObserver.disconnect();
+        mosaicVisibilityObserver.disconnect();
+        mosaicVisibleVideos.clear();
         mosaicGrid.replaceChildren();
 
         const repeatsCutoffColumns = columnCount === 10;
@@ -1259,20 +1271,13 @@
             });
             card.append(video);
             column.append(card);
-            mosaicObserver.observe(video);
+            mosaicLoadObserver.observe(video);
+            mosaicVisibilityObserver.observe(video);
           });
         });
       }
       populateMosaic();
       let mosaicResizeTimer = null;
-      let mosaicPlaybackFrame = 0;
-      window.addEventListener("scroll", () => {
-        if (mosaicPlaybackFrame) return;
-        mosaicPlaybackFrame = window.requestAnimationFrame(() => {
-          mosaicPlaybackFrame = 0;
-          syncMosaicPlayback();
-        });
-      }, { passive: true });
       window.addEventListener("resize", () => {
         window.clearTimeout(mosaicResizeTimer);
         mosaicResizeTimer = window.setTimeout(populateMosaic, 180);
