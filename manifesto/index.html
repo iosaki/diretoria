@@ -245,10 +245,8 @@
       .footer-contact a:hover {
         color: var(--red);
       }
-      .footer-instagram { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; transition: background .2s; }
+      .footer-instagram { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; }
       .footer-instagram img { display: block; width: 20px; height: 20px; }
-      .footer-instagram:hover, .footer-instagram:focus-visible { background: var(--red); }
-      .footer-instagram:hover img, .footer-instagram:focus-visible img { filter: brightness(0) invert(1); }
       .footer-bottom {
         max-width: 1392px;
         margin: 0 auto;
@@ -305,7 +303,7 @@
         }
         .manifesto-body {
           min-height: 100svh;
-          padding: 140px 24px 72px;
+          padding: 140px clamp(24px, 6vw, 92px) 72px;
         }
         .footer-main {
           gap: 22px;
@@ -314,7 +312,7 @@
       @media (max-width: 520px) {
         .manifesto-body {
           min-height: 100svh;
-          padding: 124px 24px 64px;
+          padding: 124px clamp(24px, 6vw, 92px) 64px;
         }
         .manifesto-title { margin-bottom: 22px; }
         .manifesto-copy { font-size: clamp(19px, 5.4vw, 24px); line-height: 1.55; }

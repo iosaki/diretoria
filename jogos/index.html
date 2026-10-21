@@ -674,10 +674,8 @@
       .footer-links a:focus-visible {
         color: var(--red);
       }
-      .footer-instagram { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; transition: background .2s; }
+      .footer-instagram { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; }
       .footer-instagram img { display: block; width: 20px; height: 20px; }
-      .footer-instagram:hover, .footer-instagram:focus-visible { background: var(--red); }
-      .footer-instagram:hover img, .footer-instagram:focus-visible img { filter: brightness(0) invert(1); }
       .footer-contact {
         color: #4d4945;
         font-size: 13px;
@@ -740,7 +738,7 @@
           height: 76px;
         }
         .fixtures {
-          padding: 64px 24px 72px;
+          padding: 64px clamp(24px, 6vw, 92px) 72px;
         }
         .fixtures-heading {
           align-items: flex-start;
@@ -906,7 +904,7 @@
           font-size: 8px;
         }
         .site-footer {
-          padding: 24px 20px 16px;
+          padding: 24px clamp(24px, 6vw, 92px) 16px;
         }
         .footer-main {
           grid-template-columns: 1fr 1fr;
@@ -974,7 +972,7 @@
                 <span class="fixture-score" aria-label="placar">6 × 1</span>
                 <div class="fixture-team">
                   <span class="team-crest" aria-label="Escudo UFC"
-                    ><img src="ufc.jpg" alt="" /></span
+                    ><img src="https://diretoria-site.s3.us-east-2.amazonaws.com/site/opponents-shield/ufc.jpg" alt="" /></span
                   ><span class="team-name">UFC</span>
                 </div>
               </div>
@@ -1060,7 +1058,7 @@
               <div class="fixture-pair">
                 <div class="fixture-team">
                   <span class="team-crest" aria-label="Escudo Entrelinhas"
-                    ><img src="entrelinhas.jpg" alt="" /></span
+                    ><img src="https://diretoria-site.s3.us-east-2.amazonaws.com/site/opponents-shield/entrelinhas.jpg" alt="" /></span
                   ><span class="team-name">Entrelinhas</span>
                 </div>
                 <span class="fixture-vs">×</span>

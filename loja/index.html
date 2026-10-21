@@ -218,20 +218,20 @@
         background: #171517;
       }
       .product-card.manto-one {
-        --product-front: url("loja/camisa-principal.png");
-        --product-back: url("loja/manto-um-verso.png");
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/camisa-principal.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-um-verso.png");
       }
       .product-card.manto-two {
-        --product-front: url("loja/manto-dois.png");
-        --product-back: url("loja/manto-dois-verso.png");
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-dois.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-dois-verso.png");
       }
       .product-card.manto-three {
-        --product-front: url("loja/manto-tres.png");
-        --product-back: url("loja/manto-tres-verso.png");
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-tres.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-tres-verso.png");
       }
       .product-card.manto-four {
-        --product-front: url("loja/manto-quatro.png");
-        --product-back: url("loja/manto-quatro-verso.png");
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-quatro.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-quatro-verso.png");
       }
       .product-card-visual {
         position: relative;
@@ -240,9 +240,6 @@
         place-items: center;
         overflow: hidden;
         background: #1c191c;
-      }
-      .product-card-visual img {
-        display: none;
       }
       .product-card-visual::before,
       .product-card-visual::after {
@@ -375,20 +372,11 @@
         height: 38px;
         align-items: center;
         justify-content: center;
-        transition: background 0.2s;
       }
       .footer-instagram img {
         display: block;
         width: 20px;
         height: 20px;
-      }
-      .footer-instagram:hover,
-      .footer-instagram:focus-visible {
-        background: var(--red);
-      }
-      .footer-instagram:hover img,
-      .footer-instagram:focus-visible img {
-        filter: brightness(0) invert(1);
       }
       .footer-bottom {
         max-width: 1392px;
@@ -448,7 +436,7 @@
           margin: 0;
         }
         .shop-products {
-          padding: 140px 24px 72px;
+          padding: 140px clamp(24px, 6vw, 92px) 72px;
         }
         .products-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -633,6 +621,5 @@
         <p>© 2026 Diretoria Futsal. Todos os direitos reservados.</p>
       </div>
     </footer>
-    <script></script>
   </body>
 </html>

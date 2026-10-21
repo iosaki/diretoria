@@ -24,7 +24,8 @@
         <style>
           :host { display:block; position:absolute; z-index:20; inset:0 0 auto; width:100%; }
           * { box-sizing:border-box; }
-          header { position:relative; display:flex; align-items:center; width:100%; height:86px; padding:0 clamp(24px,6vw,92px); border-bottom:1px solid rgba(255,255,255,.12); background:#000; }
+          header { position:relative; width:100%; height:86px; padding:0 clamp(24px,6vw,92px); border-bottom:1px solid rgba(255,255,255,.12); background:#000; }
+          .header-inner { display:flex; align-items:center; width:100%; max-width:1392px; height:100%; margin:0 auto; }
           .brand { display:inline-flex; flex:0 0 auto; align-items:center; }
           .brand img { display:block; width:56px; height:56px; object-fit:contain; }
           nav { display:flex; align-items:center; gap:clamp(22px,3.3vw,52px); margin-left:clamp(22px,3.3vw,52px); }
@@ -34,7 +35,7 @@
           button { display:none; width:44px; height:44px; padding:0; border:1px solid rgba(255,255,255,.42); background:transparent; cursor:pointer; }
           button span { display:block; width:18px; height:1px; margin:5px auto; background:#fff; }
           @media (max-width:780px) {
-            header { height:76px; padding:0 22px; }
+            header { height:76px; padding:0 clamp(24px,6vw,92px); }
             .brand img { width:46px; height:46px; }
             button { display:block; margin-left:auto; }
             nav { position:absolute; top:76px; right:0; left:0; display:none; align-items:stretch; flex-direction:column; gap:0; margin:0; padding:8px 24px 20px; border-bottom:1px solid rgba(255,255,255,.16); background:rgba(17,17,17,.98); }
@@ -44,11 +45,13 @@
           }
         </style>
         <header>
-          <a class="brand" href="${href("index.html#inicio")}" aria-label="Diretoria — início"><img src="${href("logo-diretoria.png")}" alt=""></a>
-          <button type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
-          <nav aria-label="Navegação principal">
-            ${links.map(([id, label, path]) => `<a href="${href(path)}"${current === id ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
-          </nav>
+          <div class="header-inner">
+            <a class="brand" href="${href("index.html#inicio")}" aria-label="Diretoria — início"><img src="${href("logo-diretoria.png")}" alt=""></a>
+            <button type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+            <nav aria-label="Navegação principal">
+              ${links.map(([id, label, path]) => `<a href="${href(path)}"${current === id ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
+            </nav>
+          </div>
         </header>`;
       const button = shadow.querySelector("button");
       const nav = shadow.querySelector("nav");
