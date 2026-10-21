@@ -27,6 +27,10 @@ function setup() {
     requests.setFrozenRows(1);
     requests.autoResizeColumns(1, 6);
   }
+  if (requests.getLastColumn() < 7 || requests.getRange(1, 7).getValue() !== "Nome na camisa") {
+    requests.getRange(1, 7).setValue("Nome na camisa");
+    requests.autoResizeColumn(7);
+  }
   return "Abas prontas. Preencha os mínimos de fabricação na aba Metas da loja.";
 }
 
@@ -42,27 +46,31 @@ function doGet(event) {
 
 function doPost(event) {
   let ok = false;
+  const requestId = String(event.parameter.requestId || "");
   try {
     const name = clean_(event.parameter.name, 120);
     const whatsapp = clean_(event.parameter.whatsapp, 30);
     const product = clean_(event.parameter.product, 80);
     const size = clean_(event.parameter.size, 20);
+    const jerseyName = clean_(event.parameter.jerseyName, 30);
     const quantity = Number(event.parameter.quantity);
     if (!name || !whatsapp || !CONFIG.products.includes(product) || !Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
       throw new Error("Dados inválidos");
     }
     const allowedSizes = product === "Boné" ? ["Único"] : ["PP", "P", "M", "G", "GG", "XGG"];
     if (!allowedSizes.includes(size)) throw new Error("Tamanho inválido");
+    const isJersey = product.startsWith("Manto");
+    if (isJersey && !jerseyName) throw new Error("Informe o nome para personalização");
     const spreadsheet = SpreadsheetApp.openById(CONFIG.spreadsheetId);
     const sheet = spreadsheet.getSheetByName(CONFIG.requestsSheet);
     if (!sheet) throw new Error("Execute setup primeiro");
-    sheet.appendRow([new Date(), name, whatsapp, product, size, quantity]);
+    sheet.appendRow([new Date(), name, whatsapp, product, size, quantity, isJersey ? jerseyName : ""]);
     ok = true;
   } catch (error) {
     console.error(error);
   }
-  const payload = JSON.stringify({ type: "diretoria-interest", ok });
-  const html = `<script>parent.postMessage(${payload}, '*');</script><p>${ok ? "Interesse registrado." : "Não foi possível registrar."}</p>`;
+  const payload = JSON.stringify({ type: "diretoria-interest", ok, requestId });
+  const html = `<script>window.top.postMessage(${payload}, '*');</script><p>${ok ? "Interesse registrado." : "Não foi possível registrar."}</p>`;
   return HtmlService.createHtmlOutput(html).setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 

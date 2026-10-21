@@ -432,6 +432,9 @@
         font-size: 12px;
         font-weight: 700;
       }
+      .interest-form [hidden] {
+        display: none !important;
+      }
       .interest-form input {
         width: 100%;
         min-height: 44px;
@@ -953,7 +956,8 @@
         <h2 id="interest-title">Lista de interesse</h2>
         <p class="interest-dialog-intro">
           Registre seu interesse para ajudar a planejar a fabricação em lote.
-          Usaremos seu WhatsApp apenas para contato sobre este pedido.
+          Usaremos seu WhatsApp para contato sobre este pedido e, nos mantos,
+          enviaremos o nome escolhido para personalização.
         </p>
         <div class="interest-product-preview">
           <img class="interest-preview-image" src="" alt="" />
@@ -979,7 +983,15 @@
               maxlength="30"
               placeholder="(11) 99999-9999"
           /></label>
+          <label class="jersey-name-field" hidden
+            >Nome na camisa<input
+              name="jerseyName"
+              maxlength="30"
+              autocomplete="off"
+              placeholder="Como deve aparecer no manto"
+          /></label>
           <input name="product" type="hidden" required />
+          <input name="requestId" type="hidden" />
           <div class="interest-form-row">
             <fieldset
               class="size-field"
@@ -1058,10 +1070,12 @@
     <script>
       // URL gerada ao implantar o Apps Script como Web App.
       const INTEREST_ENDPOINT =
-        "https://script.google.com/macros/s/AKfycbzZ6TdtRs8lnsxfUu0MyMGeiI3JcoaLNg6fEIIsoAjcGfT8DnJWB40mii6078hReJvipw/exec";
+        "https://script.google.com/macros/s/AKfycbxlPWXesNGvSVyCFanJDhhvsgTJLKUTR9nEhPIRNdM5ujgv1vvN-RSpAyo3CJ24yJft/exec";
       const interestDialog = document.querySelector(".interest-dialog");
       const interestForm = document.querySelector(".interest-form");
       const productField = interestForm.elements.product;
+      const jerseyNameField = document.querySelector(".jersey-name-field");
+      const jerseyNameInput = interestForm.elements.jerseyName;
       const sizeOptions = document.querySelector(".size-options");
       const sizeRadios = [
         ...interestForm.querySelectorAll('input[name="size"]'),
@@ -1072,6 +1086,7 @@
       const submitFrame = document.querySelector(
         '[name="interest-submit-frame"]',
       );
+      let pendingRequestId = "";
       const productCards = [
         ...document.querySelectorAll(".product-card[data-product]"),
       ];
@@ -1087,6 +1102,10 @@
             .replace(/["']?\)$/, "");
           previewImage.alt = `Prévia do produto ${card.dataset.product}`;
           const isCap = card.dataset.product === "Boné";
+          const isJersey = card.dataset.product.startsWith("Manto");
+          jerseyNameField.hidden = !isJersey;
+          jerseyNameInput.required = isJersey;
+          if (!isJersey) jerseyNameInput.value = "";
           document.querySelector(".size-field").hidden = false;
           sizeOptions.hidden = false;
           sizeRadios.forEach((radio) => {
@@ -1108,11 +1127,23 @@
         if (event.target === interestDialog) interestDialog.close();
       });
       window.addEventListener("message", (event) => {
+        let origin = "";
+        try {
+          origin = new URL(event.origin).hostname;
+        } catch {
+          return;
+        }
+        const trustedOrigin =
+          origin === "script.google.com" ||
+          origin === "script.googleusercontent.com" ||
+          origin.endsWith(".script.googleusercontent.com");
         if (
-          event.source !== submitFrame.contentWindow ||
-          event.data?.type !== "diretoria-interest"
+          !trustedOrigin ||
+          event.data?.type !== "diretoria-interest" ||
+          event.data?.requestId !== pendingRequestId
         )
           return;
+        pendingRequestId = "";
         const submitButton = interestForm.querySelector("[type=submit]");
         submitButton.disabled = false;
         interestStatus.textContent = event.data.ok
@@ -1137,6 +1168,8 @@
         submitButton.disabled = true;
         interestStatus.textContent = "Enviando…";
         interestStatus.removeAttribute("data-state");
+        pendingRequestId = crypto.randomUUID();
+        interestForm.elements.requestId.value = pendingRequestId;
         interestForm.action = INTEREST_ENDPOINT;
         interestForm.method = "post";
         interestForm.target = "interest-submit-frame";
