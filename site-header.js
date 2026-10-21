@@ -24,7 +24,7 @@
         <style>
           :host { display:block; position:absolute; z-index:20; inset:0 0 auto; width:100%; }
           * { box-sizing:border-box; }
-          header { position:relative; width:100%; height:86px; padding:0 clamp(24px,6vw,92px); border-bottom:1px solid rgba(255,255,255,.12); background:#000; }
+          header { position:relative; width:100%; height:86px; padding:0 clamp(24px,6vw,92px); background:#000; }
           .header-inner { display:flex; align-items:center; width:100%; max-width:1392px; height:100%; margin:0 auto; }
           .brand { display:inline-flex; flex:0 0 auto; align-items:center; }
           .brand img { display:block; width:56px; height:56px; object-fit:contain; }

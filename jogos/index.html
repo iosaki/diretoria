@@ -114,19 +114,6 @@
           0 0 0 140px rgba(233, 30, 39, 0.02);
         content: "";
       }
-      .site-header {
-        position: absolute;
-        z-index: 5;
-        top: 0;
-        left: 0;
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        padding: 27px clamp(24px, 6vw, 92px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent);
-      }
       .brand {
         display: inline-flex;
         flex: 0 0 auto;
@@ -582,13 +569,9 @@
       .page-jogos .hero::after {
         display: none;
       }
-      .page-jogos .site-header {
-        position: relative;
-        background: #0c090c;
-      }
       .page-jogos .fixtures {
         min-height: 65vh;
-        padding-top: 76px;
+        padding-top: 60px;
       }
       :focus-visible {
         outline: 2px solid var(--red);
@@ -723,7 +706,7 @@
       }
       @media (max-width: 480px) {
         .page-jogos .fixtures {
-          padding-top: 48px;
+          padding-top: 36px;
         }
         .hero {
           min-height: max(690px, 100svh);

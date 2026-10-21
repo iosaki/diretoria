@@ -161,7 +161,7 @@
       .shop-products {
         position: relative;
         overflow: hidden;
-        padding: 162px clamp(24px, 6vw, 92px) 96px;
+        padding: 142px clamp(24px, 6vw, 92px) 96px;
         isolation: isolate;
         background: #0c090c;
       }
@@ -664,7 +664,7 @@
           margin: 0;
         }
         .shop-products {
-          padding: 140px clamp(24px, 6vw, 92px) 72px;
+          padding: 120px clamp(24px, 6vw, 92px) 72px;
         }
         .products-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -679,7 +679,7 @@
       }
       @media (max-width: 520px) {
         .shop-products {
-          padding-top: 124px;
+          padding-top: 104px;
         }
         .product-card-info {
           align-items: flex-start;
@@ -711,7 +711,7 @@
           <div class="products-heading">
             <div>
               <p class="eyebrow">Vista as cores</p>
-              <h2 id="products-title">Coisinhas de Diretoria</h2>
+              <h2 id="products-title">Loja da Diretoria</h2>
             </div>
           </div>
           <div class="products-grid">
@@ -719,11 +719,11 @@
               <div
                 class="product-card-visual"
                 role="img"
-                aria-label="Manto I, uniforme oficial da Diretoria"
+                aria-label="Manto I, uniforme da Diretoria"
               ></div>
               <div class="product-card-info">
                 <div>
-                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-kind">Uniforme</p>
                   <p class="product-name">Manto I - Vermelho</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
@@ -743,11 +743,11 @@
               <div
                 class="product-card-visual"
                 role="img"
-                aria-label="Manto II, uniforme oficial da Diretoria"
+                aria-label="Manto II, uniforme da Diretoria"
               ></div>
               <div class="product-card-info">
                 <div>
-                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-kind">Uniforme</p>
                   <p class="product-name">Manto II - Branco</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
@@ -767,11 +767,11 @@
               <div
                 class="product-card-visual"
                 role="img"
-                aria-label="Manto III, uniforme oficial da Diretoria"
+                aria-label="Manto III, uniforme da Diretoria"
               ></div>
               <div class="product-card-info">
                 <div>
-                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-kind">Uniforme</p>
                   <p class="product-name">Manto III - Listrado</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
@@ -791,11 +791,11 @@
               <div
                 class="product-card-visual"
                 role="img"
-                aria-label="Manto IV, uniforme oficial da Diretoria"
+                aria-label="Manto IV, uniforme da Diretoria"
               ></div>
               <div class="product-card-info">
                 <div>
-                  <p class="product-kind">Uniforme oficial</p>
+                  <p class="product-kind">Uniforme</p>
                   <p class="product-name">Manto IV - Preto</p>
                 </div>
                 <p class="product-price">R$ 92,90</p>
@@ -841,7 +841,7 @@
               ></div>
               <div class="product-card-info">
                 <div>
-                  <p class="product-kind">Vestuário esportivo</p>
+                  <p class="product-kind">Vestuário</p>
                   <p class="product-name">Top</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
@@ -868,7 +868,7 @@
               ></div>
               <div class="product-card-info">
                 <div>
-                  <p class="product-kind">Vestuário esportivo</p>
+                  <p class="product-kind">Vestuário</p>
                   <p class="product-name">Corta-vento</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
@@ -911,9 +911,6 @@
           </div>
         </div>
       </section>
-      <div class="shop-note">
-        Amizade, cervejinha e futebol — exatamente nessa ordem.
-      </div>
     </main>
     <diretoria-footer id="contato"></diretoria-footer>
     <dialog class="interest-dialog" aria-labelledby="interest-title">
@@ -1127,6 +1124,9 @@
           });
           interestStatus.textContent = "";
           interestStatus.removeAttribute("data-state");
+          const submitButton = interestForm.querySelector("[type=submit]");
+          submitButton.disabled = false;
+          submitButton.textContent = "Enviar interesse";
           interestTitle.textContent = "Lista de interesse";
           interestIntro.hidden = false;
           interestForm.hidden = false;
@@ -1148,7 +1148,9 @@
         if (requestId !== pendingRequestId) return;
         if (attempt >= 12) {
           pendingRequestId = "";
-          interestForm.querySelector("[type=submit]").disabled = false;
+          const submitButton = interestForm.querySelector("[type=submit]");
+          submitButton.disabled = false;
+          submitButton.textContent = "Enviar interesse";
           interestStatus.textContent =
             "Não conseguimos confirmar o envio. Confira a planilha antes de tentar novamente.";
           interestStatus.dataset.state = "error";
@@ -1166,7 +1168,9 @@
           if (requestId !== pendingRequestId) return;
           if (received) {
             pendingRequestId = "";
-            interestForm.querySelector("[type=submit]").disabled = false;
+            const submitButton = interestForm.querySelector("[type=submit]");
+            submitButton.disabled = false;
+            submitButton.textContent = "Enviar interesse";
             interestForm.reset();
             interestTitle.textContent = "Tudo certo!";
             interestIntro.hidden = true;
@@ -1198,8 +1202,8 @@
         }
         const submitButton = interestForm.querySelector("[type=submit]");
         submitButton.disabled = true;
-        interestStatus.textContent =
-          "Enviando e aguardando confirmação da planilha…";
+        submitButton.textContent = "Enviando…";
+        interestStatus.textContent = "";
         interestStatus.removeAttribute("data-state");
         pendingRequestId = crypto.randomUUID();
         interestForm.elements.requestId.value = pendingRequestId;
