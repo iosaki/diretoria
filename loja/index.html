@@ -340,7 +340,9 @@
         letter-spacing: 0.07em;
         text-transform: uppercase;
         cursor: pointer;
-        transition: background 0.2s, color 0.2s;
+        transition:
+          background 0.2s,
+          color 0.2s;
       }
       .interest-button:hover,
       .interest-button:focus-visible,
@@ -361,8 +363,12 @@
         background: #171517;
         color: #fff;
       }
-      .interest-dialog::backdrop { background: rgba(0, 0, 0, 0.78); }
-      .interest-dialog-inner { padding: 28px; }
+      .interest-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.78);
+      }
+      .interest-dialog-inner {
+        padding: 28px;
+      }
       .interest-product-preview {
         display: grid;
         grid-template-columns: 112px 1fr;
@@ -380,15 +386,31 @@
         object-fit: contain;
         background: #1c191c;
       }
-      .interest-product-preview p { margin: 0; }
-      .interest-preview-kind { margin-bottom: 5px !important; color: #aaa; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
-      .interest-preview-name { font: 700 23px/1.1 var(--display); text-transform: uppercase; }
+      .interest-product-preview p {
+        margin: 0;
+      }
+      .interest-preview-kind {
+        margin-bottom: 5px !important;
+        color: #aaa;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .interest-preview-name {
+        font: 700 23px/1.1 var(--display);
+        text-transform: uppercase;
+      }
       .interest-dialog h2 {
         margin: 0 0 8px;
         font: 800 32px/1 var(--display);
         text-transform: uppercase;
       }
-      .interest-dialog-intro { margin: 0 0 22px; color: #bbb; font-size: 13px; line-height: 1.5; }
+      .interest-dialog-intro {
+        margin: 0 0 22px;
+        color: #bbb;
+        font-size: 13px;
+        line-height: 1.5;
+      }
       .interest-close {
         float: right;
         width: 36px;
@@ -399,8 +421,17 @@
         font-size: 22px;
         cursor: pointer;
       }
-      .interest-form { display: grid; gap: 14px; }
-      .interest-form label { display: grid; gap: 6px; color: #ddd; font-size: 12px; font-weight: 700; }
+      .interest-form {
+        display: grid;
+        gap: 14px;
+      }
+      .interest-form label {
+        display: grid;
+        gap: 6px;
+        color: #ddd;
+        font-size: 12px;
+        font-weight: 700;
+      }
       .interest-form input {
         width: 100%;
         min-height: 44px;
@@ -411,9 +442,22 @@
         color: #fff;
         font: 500 14px var(--body);
       }
-      .interest-form-row { display: grid; grid-template-columns: 1fr 110px; gap: 12px; }
-      .size-options { display: flex; flex-wrap: wrap; gap: 8px; }
-      .size-options input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+      .interest-form-row {
+        display: grid;
+        grid-template-columns: 1fr 110px;
+        gap: 12px;
+      }
+      .size-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .size-options input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+      }
       .size-options label {
         display: inline-flex;
         min-width: 42px;
@@ -425,16 +469,41 @@
         color: #ddd;
         cursor: pointer;
       }
-      .size-options input:checked + label { border-color: var(--red); background: var(--red); color: #fff; }
-      .size-options input:focus-visible + label { outline: 2px solid #fff; outline-offset: 2px; }
-      .size-options[hidden] { display: none; }
-      .size-options label[hidden] { display: none; }
-      .interest-status { min-height: 20px; margin: 0; color: #ddd; font-size: 13px; line-height: 1.5; }
-      .interest-status[data-state="error"] { color: #ff8b8b; }
-      .interest-status[data-state="success"] { color: #9de0ad; }
+      .size-options input:checked + label {
+        border-color: var(--red);
+        background: var(--red);
+        color: #fff;
+      }
+      .size-options input:focus-visible + label {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+      .size-options[hidden] {
+        display: none;
+      }
+      .size-options label[hidden] {
+        display: none;
+      }
+      .interest-status {
+        min-height: 20px;
+        margin: 0;
+        color: #ddd;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .interest-status[data-state="error"] {
+        color: #ff8b8b;
+      }
+      .interest-status[data-state="success"] {
+        color: #9de0ad;
+      }
       @media (max-width: 520px) {
-        .product-interest { padding: 0 14px 14px; }
-        .interest-dialog-inner { padding: 22px; }
+        .product-interest {
+          padding: 0 14px 14px;
+        }
+        .interest-dialog-inner {
+          padding: 22px;
+        }
       }
       .site-footer {
         padding: 30px clamp(24px, 6vw, 92px) 18px;
@@ -642,9 +711,18 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto I</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
             <article class="product-card manto-two" data-product="Manto II">
               <div
@@ -657,9 +735,18 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto II</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
             <article class="product-card manto-three" data-product="Manto III">
               <div
@@ -672,9 +759,18 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto III</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
             <article class="product-card manto-four" data-product="Manto IV">
               <div
@@ -689,7 +785,14 @@
                 </div>
                 <p class="product-price">R$ 92,90</p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
             <article class="product-card cap" data-product="Boné">
               <div
@@ -702,9 +805,18 @@
                   <p class="product-kind">Acessório</p>
                   <p class="product-name">Boné</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
             <article class="product-card top" data-product="Top">
               <div
@@ -717,11 +829,23 @@
                   <p class="product-kind">Vestuário esportivo</p>
                   <p class="product-name">Top</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
-            <article class="product-card windbreaker" data-product="Corta-vento">
+            <article
+              class="product-card windbreaker"
+              data-product="Corta-vento"
+            >
               <div
                 class="product-card-visual"
                 role="img"
@@ -732,9 +856,18 @@
                   <p class="product-kind">Vestuário esportivo</p>
                   <p class="product-name">Corta-vento</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
             <article class="product-card sweatshirt" data-product="Moletom">
               <div
@@ -747,9 +880,18 @@
                   <p class="product-kind">Vestuário</p>
                   <p class="product-name">Moletom</p>
                 </div>
-                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+                <p class="product-price" aria-label="Preço ainda não definido">
+                  -
+                </p>
               </div>
-              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
+              <div class="product-interest">
+                <p class="product-interest-summary" data-interest-summary>
+                  Consulte a quantidade da lista
+                </p>
+                <button class="interest-button" type="button">
+                  Demonstrar interesse
+                </button>
+              </div>
             </article>
           </div>
         </div>
@@ -805,57 +947,144 @@
     </footer>
     <dialog class="interest-dialog" aria-labelledby="interest-title">
       <div class="interest-dialog-inner">
-        <button class="interest-close" type="button" aria-label="Fechar">×</button>
+        <button class="interest-close" type="button" aria-label="Fechar">
+          ×
+        </button>
         <h2 id="interest-title">Lista de interesse</h2>
-        <p class="interest-dialog-intro">Registre seu interesse para ajudar a planejar a fabricação em lote. Usaremos seu WhatsApp apenas para contato sobre este pedido.</p>
+        <p class="interest-dialog-intro">
+          Registre seu interesse para ajudar a planejar a fabricação em lote.
+          Usaremos seu WhatsApp apenas para contato sobre este pedido.
+        </p>
         <div class="interest-product-preview">
           <img class="interest-preview-image" src="" alt="" />
-          <div><p class="interest-preview-kind">Produto selecionado</p><p class="interest-preview-name"></p></div>
+          <div>
+            <p class="interest-preview-kind">Produto selecionado</p>
+            <p class="interest-preview-name"></p>
+          </div>
         </div>
         <form class="interest-form">
-          <label>Nome<input name="name" autocomplete="name" required maxlength="120" /></label>
-          <label>WhatsApp<input name="whatsapp" type="tel" autocomplete="tel" required maxlength="30" placeholder="(11) 99999-9999" /></label>
+          <label
+            >Nome<input
+              name="name"
+              autocomplete="name"
+              required
+              maxlength="120"
+          /></label>
+          <label
+            >WhatsApp<input
+              name="whatsapp"
+              type="tel"
+              autocomplete="tel"
+              required
+              maxlength="30"
+              placeholder="(11) 99999-9999"
+          /></label>
           <input name="product" type="hidden" required />
           <div class="interest-form-row">
-            <fieldset class="size-field" style="margin:0;padding:0;border:0">
-              <legend style="margin-bottom:6px;color:#ddd;font-size:12px;font-weight:700">Tamanho</legend>
+            <fieldset
+              class="size-field"
+              style="margin: 0; padding: 0; border: 0"
+            >
+              <legend
+                style="
+                  margin-bottom: 6px;
+                  color: #ddd;
+                  font-size: 12px;
+                  font-weight: 700;
+                "
+              >
+                Tamanho
+              </legend>
               <div class="size-options">
-                <input id="size-pp" type="radio" name="size" value="PP" required /><label for="size-pp">PP</label>
-                <input id="size-p" type="radio" name="size" value="P" /><label for="size-p">P</label>
-                <input id="size-m" type="radio" name="size" value="M" /><label for="size-m">M</label>
-                <input id="size-g" type="radio" name="size" value="G" /><label for="size-g">G</label>
-                <input id="size-gg" type="radio" name="size" value="GG" /><label for="size-gg">GG</label>
-                <input id="size-xgg" type="radio" name="size" value="XGG" /><label for="size-xgg">XGG</label>
-                <input id="size-single" type="radio" name="size" value="Único" /><label for="size-single">Único</label>
+                <input
+                  id="size-pp"
+                  type="radio"
+                  name="size"
+                  value="PP"
+                  required
+                /><label for="size-pp">PP</label>
+                <input id="size-p" type="radio" name="size" value="P" /><label
+                  for="size-p"
+                  >P</label
+                >
+                <input id="size-m" type="radio" name="size" value="M" /><label
+                  for="size-m"
+                  >M</label
+                >
+                <input id="size-g" type="radio" name="size" value="G" /><label
+                  for="size-g"
+                  >G</label
+                >
+                <input id="size-gg" type="radio" name="size" value="GG" /><label
+                  for="size-gg"
+                  >GG</label
+                >
+                <input
+                  id="size-xgg"
+                  type="radio"
+                  name="size"
+                  value="XGG"
+                /><label for="size-xgg">XGG</label>
+                <input
+                  id="size-single"
+                  type="radio"
+                  name="size"
+                  value="Único"
+                /><label for="size-single">Único</label>
               </div>
             </fieldset>
-            <label>Quantidade<input name="quantity" type="number" min="1" max="99" value="1" required /></label>
+            <label
+              >Quantidade<input
+                name="quantity"
+                type="number"
+                min="1"
+                max="99"
+                value="1"
+                required
+            /></label>
           </div>
-          <button class="interest-submit" type="submit">Enviar interesse</button>
+          <button class="interest-submit" type="submit">
+            Enviar interesse
+          </button>
           <p class="interest-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </dialog>
-    <iframe name="interest-submit-frame" title="Envio do formulário" hidden></iframe>
+    <iframe
+      name="interest-submit-frame"
+      title="Envio do formulário"
+      hidden
+    ></iframe>
     <script>
       // URL gerada ao implantar o Apps Script como Web App.
-      const INTEREST_ENDPOINT = "CONFIGURE_APPS_SCRIPT_WEB_APP_URL";
+      const INTEREST_ENDPOINT =
+        "https://script.google.com/macros/s/AKfycbzZ6TdtRs8lnsxfUu0MyMGeiI3JcoaLNg6fEIIsoAjcGfT8DnJWB40mii6078hReJvipw/exec";
       const interestDialog = document.querySelector(".interest-dialog");
       const interestForm = document.querySelector(".interest-form");
       const productField = interestForm.elements.product;
       const sizeOptions = document.querySelector(".size-options");
-      const sizeRadios = [...interestForm.querySelectorAll('input[name="size"]')];
+      const sizeRadios = [
+        ...interestForm.querySelectorAll('input[name="size"]'),
+      ];
       const previewImage = document.querySelector(".interest-preview-image");
       const previewName = document.querySelector(".interest-preview-name");
       const interestStatus = document.querySelector(".interest-status");
-      const submitFrame = document.querySelector('[name="interest-submit-frame"]');
-      const productCards = [...document.querySelectorAll(".product-card[data-product]")];
+      const submitFrame = document.querySelector(
+        '[name="interest-submit-frame"]',
+      );
+      const productCards = [
+        ...document.querySelectorAll(".product-card[data-product]"),
+      ];
       productCards.forEach((card) => {
         card.querySelector(".interest-button").addEventListener("click", () => {
           productField.value = card.dataset.product;
           previewName.textContent = card.dataset.product;
-          const frontImage = getComputedStyle(card).getPropertyValue("--product-front").trim();
-          previewImage.src = frontImage.replace(/^url\(["']?/, "").replace(/["']?\)$/, "");
+          const frontImage = getComputedStyle(card)
+            .getPropertyValue("--product-front")
+            .trim();
+          previewImage.src = frontImage
+            .replace(/^url\(["']?/, "")
+            .replace(/["']?\)$/, "");
           previewImage.alt = `Prévia do produto ${card.dataset.product}`;
           const isCap = card.dataset.product === "Boné";
           document.querySelector(".size-field").hidden = false;
@@ -863,19 +1092,27 @@
           sizeRadios.forEach((radio) => {
             radio.required = !isCap && radio.value === "PP";
             radio.checked = isCap && radio.value === "Único";
-            radio.nextElementSibling.hidden = isCap ? radio.value !== "Único" : radio.value === "Único";
+            radio.nextElementSibling.hidden = isCap
+              ? radio.value !== "Único"
+              : radio.value === "Único";
           });
           interestStatus.textContent = "";
           interestStatus.removeAttribute("data-state");
           interestDialog.showModal();
         });
       });
-      document.querySelector(".interest-close").addEventListener("click", () => interestDialog.close());
+      document
+        .querySelector(".interest-close")
+        .addEventListener("click", () => interestDialog.close());
       interestDialog.addEventListener("click", (event) => {
         if (event.target === interestDialog) interestDialog.close();
       });
       window.addEventListener("message", (event) => {
-        if (event.source !== submitFrame.contentWindow || event.data?.type !== "diretoria-interest") return;
+        if (
+          event.source !== submitFrame.contentWindow ||
+          event.data?.type !== "diretoria-interest"
+        )
+          return;
         const submitButton = interestForm.querySelector("[type=submit]");
         submitButton.disabled = false;
         interestStatus.textContent = event.data.ok
@@ -886,8 +1123,13 @@
       });
       interestForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(INTEREST_ENDPOINT)) {
-          interestStatus.textContent = "A lista de interesse ainda está sendo conectada à planilha.";
+        if (
+          !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(
+            INTEREST_ENDPOINT,
+          )
+        ) {
+          interestStatus.textContent =
+            "A lista de interesse ainda está sendo conectada à planilha.";
           interestStatus.dataset.state = "error";
           return;
         }
@@ -901,7 +1143,12 @@
         interestForm.submit();
       });
       function loadInterestTotals() {
-        if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(INTEREST_ENDPOINT)) return;
+        if (
+          !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(
+            INTEREST_ENDPOINT,
+          )
+        )
+          return;
         const callback = `interestCallback${Date.now()}`;
         window[callback] = (totals) => {
           productCards.forEach((card) => {
@@ -920,7 +1167,9 @@
         };
         const script = document.createElement("script");
         script.src = `${INTEREST_ENDPOINT}?action=totals&callback=${callback}`;
-        script.onerror = () => { delete window[callback]; };
+        script.onerror = () => {
+          delete window[callback];
+        };
         document.head.append(script);
       }
       loadInterestTotals();
