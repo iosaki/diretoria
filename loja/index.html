@@ -428,6 +428,10 @@
       .interest-dialog {
         width: min(520px, calc(100% - 32px));
         max-height: min(90vh, 760px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        scroll-padding-block: 16px;
         padding: 0;
         border: 1px solid #494349;
         background: #171517;
@@ -435,6 +439,14 @@
       }
       .interest-dialog::backdrop {
         background: rgba(0, 0, 0, 0.78);
+      }
+      body.interest-modal-open {
+        position: fixed;
+        top: var(--interest-page-lock-top);
+        right: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
       }
       .interest-dialog-inner {
         padding: 28px;
@@ -553,7 +565,7 @@
         border-radius: 0;
         background: #0c090c;
         color: #fff;
-        font: 500 14px var(--body);
+        font: 500 16px var(--body);
       }
       .interest-form-row {
         display: grid;
@@ -611,11 +623,21 @@
         color: #9de0ad;
       }
       @media (max-width: 520px) {
+        .interest-dialog {
+          max-height: calc(100vh - 24px);
+          max-height: calc(100dvh - 24px);
+        }
         .product-interest {
           padding: 0 14px 14px;
         }
         .interest-dialog-inner {
           padding: 22px;
+        }
+        .interest-close {
+          position: sticky;
+          z-index: 2;
+          top: 0;
+          margin-bottom: -36px;
         }
       }
       @media (max-width: 780px) {
@@ -1099,6 +1121,7 @@
         '[name="interest-submit-frame"]',
       );
       let pendingRequestId = "";
+      let interestPageScrollY = 0;
       const productCards = [
         ...document.querySelectorAll(".product-card[data-product]"),
       ];
@@ -1161,6 +1184,12 @@
           interestForm.hidden = false;
           interestSuccess.hidden = true;
           interestProductPreview.hidden = false;
+          interestPageScrollY = window.scrollY;
+          document.body.style.setProperty(
+            "--interest-page-lock-top",
+            `-${interestPageScrollY}px`,
+          );
+          document.body.classList.add("interest-modal-open");
           interestDialog.showModal();
         });
       });
@@ -1170,6 +1199,11 @@
       document
         .querySelector(".interest-success-close")
         .addEventListener("click", () => interestDialog.close());
+      interestDialog.addEventListener("close", () => {
+        document.body.classList.remove("interest-modal-open");
+        document.body.style.removeProperty("--interest-page-lock-top");
+        window.scrollTo(0, interestPageScrollY);
+      });
       interestDialog.addEventListener("click", (event) => {
         if (event.target === interestDialog) interestDialog.close();
       });
