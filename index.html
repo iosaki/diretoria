@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       if (window.location.pathname.endsWith("/index.html")) {
-        const cleanPath = window.location.pathname.slice(0, -"index.html".length);
-        window.history.replaceState(null, "", `${cleanPath}${window.location.search}${window.location.hash}`);
+        const cleanPath = window.location.pathname.slice(
+          0,
+          -"index.html".length,
+        );
+        window.history.replaceState(
+          null,
+          "",
+          `${cleanPath}${window.location.search}${window.location.hash}`,
+        );
       }
     </script>
     <meta name="theme-color" content="#111111" />
@@ -88,7 +95,7 @@
         background-image: url("linha-pontilhada.svg");
         background-size: 24px 100%;
         background-repeat: repeat-x;
-        filter: blur(.65px);
+        filter: blur(0.65px);
         content: "";
         mask-image: linear-gradient(
           to bottom,
@@ -401,57 +408,392 @@
       .hero-kicker span {
         color: #dfbd9d;
       }
-      .manifesto { padding: 24px; border-top: 1px solid #333; border-bottom: 1px solid #333; background: #151515; color: #dfbd9d; text-align: center; }
-      .manifesto p { margin: 0; font-family: var(--display); font-size: clamp(18px, 3vw, 28px); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-      .social-wall { position: relative; padding: 0; overflow: hidden; background: var(--red); color: #fff; }
-      .social-wall::before { position: absolute; z-index: 0; inset: 0; background-image: url("linha-pontilhada.svg"); background-size: 24px 100%; background-repeat: repeat-x; filter: brightness(0) invert(1) blur(.65px); content: ""; pointer-events: none; }
-      .social-wall-inner { position: relative; z-index: 1; width: 100%; max-width: none; margin: 0 auto; }
-      .social-wall-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 34px; }
-      .social-wall-eyebrow { margin: 0 0 10px; color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
-      .social-wall h2 { margin: 0; font-family: var(--display); font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -.035em; line-height: .9; text-transform: uppercase; }
-      .social-wall-heading p:last-child { max-width: 310px; margin: 0; color: #aaa; font-size: 13px; line-height: 1.6; }
-      .mosaic-grid { display: grid; width: 116%; min-height: clamp(100svh, 100vh, 980px); height: auto; align-content: center; margin-left: -8%; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 10px; overflow: hidden; }
-      .mosaic-column { display: flex; min-width: 0; flex-direction: column; gap: 10px; overflow: hidden; transform: rotate(2deg) scale(1.01); transform-origin: center; }
-      .mosaic-card { position: relative; aspect-ratio: .5; margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 11px; background: #171517; }
-      .mosaic-card img, .mosaic-card video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
-      .mosaic-card:hover img, .mosaic-card:hover video { transform: scale(1.045); }
-      .home-links { position: relative; display: flex; min-height: 72svh; align-items: center; overflow: hidden; padding: 88px clamp(24px, 6vw, 92px); background: var(--red); color: #fff; isolation: isolate; }
-      .home-links::before { position: absolute; z-index: -1; inset: 0; background-image: url("linha-pontilhada-bege.svg"); background-size: 24px 100%; background-repeat: repeat-x; filter: blur(.65px); content: ""; mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); }
-      .home-links-inner { width: 100%; max-width: 1392px; margin: 0 auto; }
-      .home-links-heading { margin-bottom: 38px; }
-      .home-links-eyebrow { margin: 0 0 12px; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
-      .home-links-title { margin: 0; color: #fff; font-family: var(--display); font-size: clamp(38px, 6vw, 72px); font-weight: 800; letter-spacing: -.035em; line-height: .95; text-transform: uppercase; }
-      .home-links-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-      .home-link { position: relative; display: flex; min-height: 250px; flex-direction: column; justify-content: space-between; padding: 25px 24px 24px; border: 1px solid rgba(255,255,255,.18); border-radius: 11px; background: #151313; color: #fff; text-decoration: none; transition: transform .2s, background .2s, border-color .2s; }
-      .home-link + .home-link { padding-left: 24px; }
-      .home-link:hover { transform: translateY(-5px); border-color: #fff; background: #211819; }
-      .home-link-index { color: #ff5860; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
-      .home-link-bottom { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
-      .home-link h3 { margin: 0 0 8px; font-family: var(--display); font-size: clamp(26px, 3vw, 40px); font-weight: 800; letter-spacing: -.025em; line-height: .95; text-transform: uppercase; }
-      .home-link p { max-width: 250px; margin: 0; color: #aaa; font-size: 13px; line-height: 1.5; }
-      .fixtures { padding: 84px clamp(24px, 6vw, 92px) 96px; border-top: 1px solid #333; background: #111; color: #fff; }
-      .fixtures-inner { max-width: 1392px; margin: 0 auto; }
-      .fixtures-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
-      .fixtures-eyebrow { margin: 0 0 10px; color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
-      .fixtures h2 { margin: 0; font-family: var(--display); font-size: clamp(42px, 6vw, 72px); font-weight: 800; letter-spacing: -.035em; line-height: .9; text-transform: uppercase; }
-      .fixtures-tabs { display: flex; gap: 8px; padding: 5px; border: 1px solid #383838; }
-      .fixtures-tabs button { padding: 12px 16px; border: 0; background: transparent; color: #aaa; cursor: pointer; font: inherit; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-      .fixtures-tabs button[aria-selected="true"] { background: var(--red); color: white; }
-      .fixture-panel[hidden] { display: none; }
-      .fixture-date { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; color: #aaa; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-      .fixture-date::before { width: 20px; height: 1px; background: var(--red); content: ""; }
-      .fixture-list { border-top: 1px solid #383838; }
-      .fixture { display: grid; grid-template-columns: 78px 1fr auto; align-items: center; gap: 24px; min-height: 94px; border-bottom: 1px solid #383838; }
-      .fixture-time { color: #c8a98c; font-family: var(--display); font-size: 25px; font-weight: 700; }
-      .fixture-pair { display: flex; align-items: center; justify-content: center; gap: 18px; }
-      .fixture-team { display: flex; min-width: 180px; align-items: center; gap: 10px; font-size: 12px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
-      .fixture-team:last-child { justify-content: flex-end; text-align: right; }
-      .team-crest { display: grid; width: 40px; height: 40px; flex: 0 0 40px; place-items: center; border: 1px solid currentColor; border-radius: 50% 50% 46% 46%; color: var(--crest-color, #dfbd9d); font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: -.03em; }
-      .team-crest img { width: 34px; height: 34px; object-fit: contain; }
-      .fixture-vs { color: #777; font-size: 9px; font-weight: 800; letter-spacing: .15em; }
-      .fixture-status { padding: 7px 9px; border: 1px solid #424242; color: #999; font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-      .fixture-empty { padding: 30px; border: 1px solid #383838; color: #aaa; font-size: 14px; text-align: center; }
-      .fixture-note { margin: 16px 0 0; color: #777; font-size: 10px; letter-spacing: .04em; }
+      .manifesto {
+        padding: 24px;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        background: #151515;
+        color: #dfbd9d;
+        text-align: center;
+      }
+      .manifesto p {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(18px, 3vw, 28px);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .social-wall {
+        position: relative;
+        padding: 0;
+        overflow: hidden;
+        background: var(--red);
+        color: #fff;
+      }
+      .social-wall::before {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        background-image: url("linha-pontilhada.svg");
+        background-size: 24px 100%;
+        background-repeat: repeat-x;
+        filter: brightness(0) invert(1) blur(0.65px);
+        content: "";
+        pointer-events: none;
+      }
+      .social-wall-inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+      }
+      .social-wall-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 30px;
+        margin-bottom: 34px;
+      }
+      .social-wall-eyebrow {
+        margin: 0 0 10px;
+        color: var(--red);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .social-wall h2 {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(40px, 6vw, 72px);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+      .social-wall-heading p:last-child {
+        max-width: 310px;
+        margin: 0;
+        color: #aaa;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .mosaic-grid {
+        display: grid;
+        width: 116%;
+        min-height: clamp(100svh, 100vh, 980px);
+        height: auto;
+        align-content: center;
+        margin-left: -8%;
+        grid-template-columns: repeat(10, minmax(0, 1fr));
+        gap: 10px;
+        overflow: hidden;
+      }
+      .mosaic-column {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        transform: rotate(2deg) scale(1.01);
+        transform-origin: center;
+      }
+      .mosaic-card {
+        position: relative;
+        aspect-ratio: 0.5;
+        margin: 0;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 11px;
+        background: #171517;
+      }
+      .mosaic-card img,
+      .mosaic-card video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .mosaic-card:hover img,
+      .mosaic-card:hover video {
+        transform: scale(1.045);
+      }
+      .home-links {
+        position: relative;
+        display: flex;
+        min-height: 72svh;
+        align-items: center;
+        overflow: hidden;
+        padding: 88px clamp(24px, 6vw, 92px);
+        background: var(--red);
+        color: #fff;
+        isolation: isolate;
+      }
+      .home-links::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background-image: url("linha-pontilhada-bege.svg");
+        background-size: 24px 100%;
+        background-repeat: repeat-x;
+        filter: blur(0.65px);
+        content: "";
+        mask-image: linear-gradient(
+          180deg,
+          transparent,
+          #000 12%,
+          #000 88%,
+          transparent
+        );
+      }
+      .home-links-inner {
+        width: 100%;
+        max-width: 1392px;
+        margin: 0 auto;
+      }
+      .home-links-heading {
+        margin-bottom: 38px;
+      }
+      .home-links-eyebrow {
+        margin: 0 0 12px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .home-links-title {
+        margin: 0;
+        color: #fff;
+        font-family: var(--display);
+        font-size: clamp(38px, 6vw, 72px);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+      .home-links-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .home-link {
+        position: relative;
+        display: flex;
+        min-height: 250px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 25px 24px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 11px;
+        background: #151313;
+        color: #fff;
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .home-link + .home-link {
+        padding-left: 24px;
+      }
+      .home-link:hover {
+        transform: translateY(-5px);
+        border-color: #fff;
+        background: #211819;
+      }
+      .home-link-index {
+        color: #ff5860;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+      }
+      .home-link-bottom {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+      }
+      .home-link h3 {
+        margin: 0 0 8px;
+        font-family: var(--display);
+        font-size: clamp(26px, 3vw, 40px);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+      .home-link p {
+        max-width: 250px;
+        margin: 0;
+        color: #aaa;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .fixtures {
+        padding: 84px clamp(24px, 6vw, 92px) 96px;
+        border-top: 1px solid #333;
+        background: #111;
+        color: #fff;
+      }
+      .fixtures-inner {
+        max-width: 1392px;
+        margin: 0 auto;
+      }
+      .fixtures-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 30px;
+        margin-bottom: 36px;
+      }
+      .fixtures-eyebrow {
+        margin: 0 0 10px;
+        color: var(--red);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .fixtures h2 {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(42px, 6vw, 72px);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+      .fixtures-tabs {
+        display: flex;
+        gap: 8px;
+        padding: 5px;
+        border: 1px solid #383838;
+      }
+      .fixtures-tabs button {
+        padding: 12px 16px;
+        border: 0;
+        background: transparent;
+        color: #aaa;
+        cursor: pointer;
+        font: inherit;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .fixtures-tabs button[aria-selected="true"] {
+        background: var(--red);
+        color: white;
+      }
+      .fixture-panel[hidden] {
+        display: none;
+      }
+      .fixture-date {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 12px;
+        color: #aaa;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .fixture-date::before {
+        width: 20px;
+        height: 1px;
+        background: var(--red);
+        content: "";
+      }
+      .fixture-list {
+        border-top: 1px solid #383838;
+      }
+      .fixture {
+        display: grid;
+        grid-template-columns: 78px 1fr auto;
+        align-items: center;
+        gap: 24px;
+        min-height: 94px;
+        border-bottom: 1px solid #383838;
+      }
+      .fixture-time {
+        color: #c8a98c;
+        font-family: var(--display);
+        font-size: 25px;
+        font-weight: 700;
+      }
+      .fixture-pair {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+      .fixture-team {
+        display: flex;
+        min-width: 180px;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 750;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .fixture-team:last-child {
+        justify-content: flex-end;
+        text-align: right;
+      }
+      .team-crest {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        place-items: center;
+        border: 1px solid currentColor;
+        border-radius: 50% 50% 46% 46%;
+        color: var(--crest-color, #dfbd9d);
+        font-family: var(--display);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+      .team-crest img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+      .fixture-vs {
+        color: #777;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+      }
+      .fixture-status {
+        padding: 7px 9px;
+        border: 1px solid #424242;
+        color: #999;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .fixture-empty {
+        padding: 30px;
+        border: 1px solid #383838;
+        color: #aaa;
+        font-size: 14px;
+        text-align: center;
+      }
+      .fixture-note {
+        margin: 16px 0 0;
+        color: #777;
+        font-size: 10px;
+        letter-spacing: 0.04em;
+      }
       .site-footer {
         padding: 30px clamp(24px, 6vw, 92px) 18px;
         background: var(--paper);
@@ -471,7 +813,9 @@
         align-items: center;
         gap: 10px;
       }
-      .footer-brand-block { align-self: center; }
+      .footer-brand-block {
+        align-self: center;
+      }
       .footer-brand img {
         width: 48px;
         height: 48px;
@@ -517,14 +861,26 @@
       .footer-links a:focus-visible {
         color: var(--red);
       }
-      .footer-instagram { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; }
-      .footer-instagram img { display: block; width: 20px; height: 20px; }
+      .footer-instagram {
+        display: inline-flex;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+      }
+      .footer-instagram img {
+        display: block;
+        width: 20px;
+        height: 20px;
+      }
       .footer-contact {
         color: #4d4945;
         font-size: 13px;
         line-height: 1.9;
       }
-      .footer-contact a { overflow-wrap: anywhere; }
+      .footer-contact a {
+        overflow-wrap: anywhere;
+      }
       .footer-contact strong {
         color: var(--ink);
       }
@@ -549,8 +905,12 @@
         align-items: center;
         gap: 19px;
       }
-      .footer-bottom a { color: var(--ink); }
-      .footer-bottom a:hover { color: var(--red); }
+      .footer-bottom a {
+        color: var(--ink);
+      }
+      .footer-bottom a:hover {
+        color: var(--red);
+      }
       .footer-social a {
         color: var(--ink);
         font-size: 10px;
@@ -571,29 +931,100 @@
         }
       }
       @media (max-width: 780px) {
-        .social-wall { padding: 0 0 70px; }
-        .home-links { min-height: auto; padding: 68px clamp(24px, 6vw, 92px) 76px; }
-        .home-links-heading { margin-bottom: 27px; }
-        .home-links-grid { grid-template-columns: 1fr; }
-        .home-link, .home-link + .home-link { min-height: 160px; padding: 20px; border-left: 1px solid rgba(255,255,255,.18); }
-        .home-link-bottom { align-items: center; }
-        .home-link p { max-width: 290px; }
-        .social-wall-heading { align-items: flex-start; flex-direction: column; gap: 14px; }
-        .social-wall-heading p:last-child { max-width: 420px; }
-        .mosaic-grid { width: 120%; margin-left: -10%; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
-        .mosaic-column { gap: 8px; }
-        .fixtures { padding: 64px clamp(24px, 6vw, 92px) 72px; }
-        .fixtures-heading { align-items: flex-start; flex-direction: column; gap: 22px; }
-        .fixtures-tabs { width: 100%; }
-        .fixtures-tabs button { flex: 1; padding: 11px 6px; font-size: 9px; }
-        .fixture { grid-template-columns: 52px 1fr; gap: 10px; padding: 12px 0; }
-        .fixture-time { font-size: 20px; }
-        .fixture-pair { justify-content: flex-start; gap: 8px; }
-        .fixture-team { min-width: 0; flex: 1; flex-direction: column; gap: 5px; font-size: 8px; text-align: center; }
-        .fixture-team:last-child { justify-content: flex-start; text-align: center; }
-        .team-crest { width: 34px; height: 34px; flex-basis: 34px; }
-        .team-crest img { width: 30px; height: 30px; }
-        .fixture-status { display: none; }
+        .social-wall {
+          padding: 0 0 70px;
+        }
+        .home-links {
+          min-height: auto;
+          padding: 68px clamp(24px, 6vw, 92px) 76px;
+        }
+        .home-links-heading {
+          margin-bottom: 27px;
+        }
+        .home-links-grid {
+          grid-template-columns: 1fr;
+        }
+        .home-link,
+        .home-link + .home-link {
+          min-height: 160px;
+          padding: 20px;
+          border-left: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .home-link-bottom {
+          align-items: center;
+        }
+        .home-link p {
+          max-width: 290px;
+        }
+        .social-wall-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .social-wall-heading p:last-child {
+          max-width: 420px;
+        }
+        .mosaic-grid {
+          width: 120%;
+          margin-left: -10%;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          gap: 8px;
+        }
+        .mosaic-column {
+          gap: 8px;
+        }
+        .fixtures {
+          padding: 64px clamp(24px, 6vw, 92px) 72px;
+        }
+        .fixtures-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 22px;
+        }
+        .fixtures-tabs {
+          width: 100%;
+        }
+        .fixtures-tabs button {
+          flex: 1;
+          padding: 11px 6px;
+          font-size: 9px;
+        }
+        .fixture {
+          grid-template-columns: 52px 1fr;
+          gap: 10px;
+          padding: 12px 0;
+        }
+        .fixture-time {
+          font-size: 20px;
+        }
+        .fixture-pair {
+          justify-content: flex-start;
+          gap: 8px;
+        }
+        .fixture-team {
+          min-width: 0;
+          flex: 1;
+          flex-direction: column;
+          gap: 5px;
+          font-size: 8px;
+          text-align: center;
+        }
+        .fixture-team:last-child {
+          justify-content: flex-start;
+          text-align: center;
+        }
+        .team-crest {
+          width: 34px;
+          height: 34px;
+          flex-basis: 34px;
+        }
+        .team-crest img {
+          width: 30px;
+          height: 30px;
+        }
+        .fixture-status {
+          display: none;
+        }
         .hero {
           min-height: max(520px, 78svh);
         }
@@ -674,12 +1105,23 @@
           bottom: 24px;
           left: 24px;
         }
-        .footer-main { gap: 22px; }
+        .footer-main {
+          gap: 22px;
+        }
       }
       @media (max-width: 700px) {
-        .mosaic-grid { width: 124%; margin-left: -12%; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
-        .mosaic-column { gap: 7px; }
-        .mosaic-card { aspect-ratio: .42; }
+        .mosaic-grid {
+          width: 124%;
+          margin-left: -12%;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 7px;
+        }
+        .mosaic-column {
+          gap: 7px;
+        }
+        .mosaic-card {
+          aspect-ratio: 0.42;
+        }
       }
       @media (max-width: 480px) {
         .hero {
@@ -721,11 +1163,23 @@
           bottom: 20px;
           font-size: 8px;
         }
-        .site-footer { padding: 24px clamp(24px, 6vw, 92px) 16px; }
-        .footer-main { grid-template-columns: 1fr 1fr; gap: 22px 18px; padding-bottom: 20px; }
-        .footer-brand-block { grid-column: 1 / -1; }
-        .footer-col:last-child { grid-column: 2; }
-        .footer-col h2 { margin-bottom: 10px; }
+        .site-footer {
+          padding: 24px clamp(24px, 6vw, 92px) 16px;
+        }
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+          gap: 22px 18px;
+          padding-bottom: 20px;
+        }
+        .footer-brand-block {
+          grid-column: 1 / -1;
+        }
+        .footer-col:last-child {
+          grid-column: 2;
+        }
+        .footer-col h2 {
+          margin-bottom: 10px;
+        }
         .footer-bottom {
           flex-wrap: wrap;
           gap: 10px 18px;
@@ -759,29 +1213,64 @@
         </div>
         <diretoria-header></diretoria-header>
       </section>
-      <section class="social-wall" id="momentos" aria-labelledby="social-wall-title">
+      <section
+        class="social-wall"
+        id="momentos"
+        aria-labelledby="social-wall-title"
+      >
         <div class="social-wall-inner">
-          <div class="mosaic-grid" id="mosaic-grid" role="img" aria-label="Fotos e vídeos da Diretoria em quadra"></div>
+          <div
+            class="mosaic-grid"
+            id="mosaic-grid"
+            role="img"
+            aria-label="Fotos e vídeos da Diretoria em quadra"
+          ></div>
         </div>
       </section>
       <section class="home-links" aria-labelledby="home-links-title">
         <div class="home-links-inner">
           <header class="home-links-heading">
             <p class="home-links-eyebrow">Acompanhe a Diretoria</p>
-            <h2 class="home-links-title" id="home-links-title">Dentro e fora da quadra</h2>
+            <h2 class="home-links-title" id="home-links-title">
+              Dentro e fora da quadra
+            </h2>
           </header>
-          <nav class="home-links-grid" aria-label="Conheça mais sobre a Diretoria">
+          <nav
+            class="home-links-grid"
+            aria-label="Conheça mais sobre a Diretoria"
+          >
             <a class="home-link" href="jogos/index.html">
-              <span class="home-link-index">01 / QUADRA</span>
-              <span class="home-link-bottom"><span><h3>Jogos</h3><p>Próximos desafios, resultados e tudo que acontece em quadra.</p></span></span>
+              <span class="home-link-index">01 / EM QUADRA</span>
+              <span class="home-link-bottom"
+                ><span
+                  ><h3>Calendário</h3>
+                  <p>
+                    Próximos desafios, resultados e tudo que acontece em quadra.
+                  </p></span
+                ></span
+              >
             </a>
             <a class="home-link" href="manifesto/index.html">
-              <span class="home-link-index">02 / ESSÊNCIA</span>
-              <span class="home-link-bottom"><span><h3>Manifesto</h3><p>O que nos move, o que defendemos e por que jogamos.</p></span></span>
+              <span class="home-link-index">02 / NOSSA ESSÊNCIA</span>
+              <span class="home-link-bottom"
+                ><span
+                  ><h3>Manifesto</h3>
+                  <p>
+                    O que nos move, o que defendemos e por que jogamos.
+                  </p></span
+                ></span
+              >
             </a>
             <a class="home-link" href="loja/index.html">
-              <span class="home-link-index">03 / MANTO</span>
-              <span class="home-link-bottom"><span><h3>Loja oficial</h3><p>Vista as cores e leve um pedaço da Diretoria com você.</p></span></span>
+              <span class="home-link-index">03 / COISINHAS DE DIRETORIA</span>
+              <span class="home-link-bottom"
+                ><span
+                  ><h3>Loja</h3>
+                  <p>
+                    Vista as cores e leve um pedaço da Diretoria com você.
+                  </p></span
+                ></span
+              >
             </a>
           </nav>
         </div>
@@ -802,24 +1291,35 @@
         <div class="footer-col">
           <h2>Navegue</h2>
           <nav class="footer-links" aria-label="Links do rodapé">
-            <a href="#inicio">Início</a><a href="manifesto/index.html">Manifesto</a>
-            <a href="jogos/index.html">Jogos</a>
+            <a href="#inicio">Início</a
+            ><a href="manifesto/index.html">Manifesto</a>
+            <a href="jogos/index.html">Calendário</a>
           </nav>
         </div>
         <div class="footer-col">
           <h2>Contato</h2>
-          <div class="footer-contact"><a href="mailto:oi@diretoriaffc.com.br">oi@diretoriaffc.com.br</a></div>
+          <div class="footer-contact">
+            <a href="mailto:oi@diretoriaffc.com.br">oi@diretoriaffc.com.br</a>
+          </div>
         </div>
         <div class="footer-col">
-          <h2>Loja oficial</h2>
-          <nav class="footer-links" aria-label="Loja oficial">
+          <h2>Loja</h2>
+          <nav class="footer-links" aria-label="Loja">
             <a href="loja/index.html">Acesse a loja</a>
           </nav>
         </div>
         <div class="footer-col">
           <h2>Redes sociais</h2>
           <div class="footer-links footer-social-links">
-            <a class="footer-instagram" href="https://instagram.com/diretoria.ffc/" target="_blank" rel="noreferrer" aria-label="Instagram da Diretoria" title="Instagram da Diretoria"><img src="instagram-logo.svg" alt="" /></a>
+            <a
+              class="footer-instagram"
+              href="https://instagram.com/diretoria.ffc/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram da Diretoria"
+              title="Instagram da Diretoria"
+              ><img src="instagram-logo.svg" alt=""
+            /></a>
           </div>
         </div>
       </div>
@@ -851,12 +1351,19 @@
         "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/019.mp4",
       ];
       const getMosaicColumnCount = () =>
-        window.matchMedia("(max-width: 700px)").matches ? 4 : window.matchMedia("(max-width: 780px)").matches ? 6 : 10;
+        window.matchMedia("(max-width: 700px)").matches
+          ? 4
+          : window.matchMedia("(max-width: 780px)").matches
+            ? 6
+            : 10;
       const shuffleMosaicItems = (items) => {
         const shuffled = [...items];
         for (let index = shuffled.length - 1; index > 0; index -= 1) {
           const randomIndex = Math.floor(Math.random() * (index + 1));
-          [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+          [shuffled[index], shuffled[randomIndex]] = [
+            shuffled[randomIndex],
+            shuffled[index],
+          ];
         }
         return shuffled;
       };
@@ -872,7 +1379,10 @@
 
         const repeatsCutoffColumns = columnCount === 10;
         const centerColumnCount = repeatsCutoffColumns ? 8 : columnCount;
-        const centerColumns = Array.from({ length: centerColumnCount }, () => []);
+        const centerColumns = Array.from(
+          { length: centerColumnCount },
+          () => [],
+        );
         shuffleMosaicItems(mosaicMedia).forEach((src, index) => {
           centerColumns[index % centerColumnCount].push(src);
         });
@@ -899,13 +1409,20 @@
             video.preload = "metadata";
             video.setAttribute("aria-hidden", "true");
             video.addEventListener("error", () => {
-              console.error(`Falha ao carregar vídeo do mosaico: ${src}`, video.error);
+              console.error(
+                `Falha ao carregar vídeo do mosaico: ${src}`,
+                video.error,
+              );
             });
             video.src = src;
             card.append(video);
             column.append(card);
             video.play().catch((error) => {
-              console.warn(`Reprodução recusada no mosaico: ${src}`, error.name, error.message);
+              console.warn(
+                `Reprodução recusada no mosaico: ${src}`,
+                error.name,
+                error.message,
+              );
             });
           });
         });

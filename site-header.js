@@ -17,8 +17,8 @@
       const links = [
         ["inicio", "Início", "index.html#inicio"],
         ["manifesto", "Manifesto", "manifesto/index.html"],
-        ["jogos", "Jogos", "jogos/index.html"],
-        ["loja", "Loja oficial", "loja/index.html"],
+        ["jogos", "Calendário", "jogos/index.html"],
+        ["loja", "Loja", "loja/index.html"],
       ];
       shadow.innerHTML = `
         <style>

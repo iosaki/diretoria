@@ -20,7 +20,7 @@
       name="description"
       content="Conheça a loja oficial da Diretoria Futsal."
     />
-    <title>Loja oficial — Diretoria Futsal</title>
+    <title>Loja — Diretoria Futsal</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -320,6 +320,122 @@
         font-size: 16px;
         font-weight: 800;
       }
+      .product-interest {
+        padding: 0 18px 18px;
+      }
+      .product-interest-summary {
+        min-height: 18px;
+        margin: 0 0 10px;
+        color: #aaa;
+        font-size: 11px;
+      }
+      .interest-button,
+      .interest-submit {
+        width: 100%;
+        min-height: 44px;
+        border: 1px solid #e91e27;
+        background: #e91e27;
+        color: white;
+        font: 700 12px var(--body);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .interest-button:hover,
+      .interest-button:focus-visible,
+      .interest-submit:hover,
+      .interest-submit:focus-visible {
+        background: transparent;
+      }
+      .interest-button:disabled,
+      .interest-submit:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+      .interest-dialog {
+        width: min(520px, calc(100% - 32px));
+        max-height: min(90vh, 760px);
+        padding: 0;
+        border: 1px solid #494349;
+        background: #171517;
+        color: #fff;
+      }
+      .interest-dialog::backdrop { background: rgba(0, 0, 0, 0.78); }
+      .interest-dialog-inner { padding: 28px; }
+      .interest-product-preview {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        align-items: center;
+        gap: 16px;
+        margin: 0 0 20px;
+        padding: 12px;
+        border: 1px solid #393439;
+        background: #100e10;
+      }
+      .interest-product-preview img {
+        display: block;
+        width: 112px;
+        aspect-ratio: 1;
+        object-fit: contain;
+        background: #1c191c;
+      }
+      .interest-product-preview p { margin: 0; }
+      .interest-preview-kind { margin-bottom: 5px !important; color: #aaa; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+      .interest-preview-name { font: 700 23px/1.1 var(--display); text-transform: uppercase; }
+      .interest-dialog h2 {
+        margin: 0 0 8px;
+        font: 800 32px/1 var(--display);
+        text-transform: uppercase;
+      }
+      .interest-dialog-intro { margin: 0 0 22px; color: #bbb; font-size: 13px; line-height: 1.5; }
+      .interest-close {
+        float: right;
+        width: 36px;
+        height: 36px;
+        border: 1px solid #555;
+        background: transparent;
+        color: #fff;
+        font-size: 22px;
+        cursor: pointer;
+      }
+      .interest-form { display: grid; gap: 14px; }
+      .interest-form label { display: grid; gap: 6px; color: #ddd; font-size: 12px; font-weight: 700; }
+      .interest-form input {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #514b51;
+        border-radius: 0;
+        background: #0c090c;
+        color: #fff;
+        font: 500 14px var(--body);
+      }
+      .interest-form-row { display: grid; grid-template-columns: 1fr 110px; gap: 12px; }
+      .size-options { display: flex; flex-wrap: wrap; gap: 8px; }
+      .size-options input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+      .size-options label {
+        display: inline-flex;
+        min-width: 42px;
+        min-height: 40px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        border: 1px solid #514b51;
+        color: #ddd;
+        cursor: pointer;
+      }
+      .size-options input:checked + label { border-color: var(--red); background: var(--red); color: #fff; }
+      .size-options input:focus-visible + label { outline: 2px solid #fff; outline-offset: 2px; }
+      .size-options[hidden] { display: none; }
+      .size-options label[hidden] { display: none; }
+      .interest-status { min-height: 20px; margin: 0; color: #ddd; font-size: 13px; line-height: 1.5; }
+      .interest-status[data-state="error"] { color: #ff8b8b; }
+      .interest-status[data-state="success"] { color: #9de0ad; }
+      @media (max-width: 520px) {
+        .product-interest { padding: 0 14px 14px; }
+        .interest-dialog-inner { padding: 22px; }
+      }
       .site-footer {
         padding: 30px clamp(24px, 6vw, 92px) 18px;
         background: var(--paper);
@@ -515,7 +631,7 @@
             </div>
           </div>
           <div class="products-grid">
-            <article class="product-card manto-one">
+            <article class="product-card manto-one" data-product="Manto I">
               <div
                 class="product-card-visual"
                 role="img"
@@ -528,8 +644,9 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card manto-two">
+            <article class="product-card manto-two" data-product="Manto II">
               <div
                 class="product-card-visual"
                 role="img"
@@ -542,8 +659,9 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card manto-three">
+            <article class="product-card manto-three" data-product="Manto III">
               <div
                 class="product-card-visual"
                 role="img"
@@ -556,8 +674,9 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card manto-four">
+            <article class="product-card manto-four" data-product="Manto IV">
               <div
                 class="product-card-visual"
                 role="img"
@@ -570,8 +689,9 @@
                 </div>
                 <p class="product-price">R$ 92,90</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card cap">
+            <article class="product-card cap" data-product="Boné">
               <div
                 class="product-card-visual"
                 role="img"
@@ -584,8 +704,9 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card top">
+            <article class="product-card top" data-product="Top">
               <div
                 class="product-card-visual"
                 role="img"
@@ -598,8 +719,9 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card windbreaker">
+            <article class="product-card windbreaker" data-product="Corta-vento">
               <div
                 class="product-card-visual"
                 role="img"
@@ -612,8 +734,9 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
-            <article class="product-card sweatshirt">
+            <article class="product-card sweatshirt" data-product="Moletom">
               <div
                 class="product-card-visual"
                 role="img"
@@ -626,6 +749,7 @@
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
+              <div class="product-interest"><p class="product-interest-summary" data-interest-summary>Consulte a quantidade da lista</p><button class="interest-button" type="button">Demonstrar interesse</button></div>
             </article>
           </div>
         </div>
@@ -651,7 +775,7 @@
           <nav class="footer-links" aria-label="Links do rodapé">
             <a href="index.html#inicio">Início</a
             ><a href="manifesto/index.html">Manifesto</a
-            ><a href="jogos/index.html">Jogos</a>
+            ><a href="jogos/index.html">Calendário</a>
           </nav>
         </div>
         <div class="footer-col">
@@ -679,5 +803,127 @@
         <p>© 2026 Diretoria Futsal. Todos os direitos reservados.</p>
       </div>
     </footer>
+    <dialog class="interest-dialog" aria-labelledby="interest-title">
+      <div class="interest-dialog-inner">
+        <button class="interest-close" type="button" aria-label="Fechar">×</button>
+        <h2 id="interest-title">Lista de interesse</h2>
+        <p class="interest-dialog-intro">Registre seu interesse para ajudar a planejar a fabricação em lote. Usaremos seu WhatsApp apenas para contato sobre este pedido.</p>
+        <div class="interest-product-preview">
+          <img class="interest-preview-image" src="" alt="" />
+          <div><p class="interest-preview-kind">Produto selecionado</p><p class="interest-preview-name"></p></div>
+        </div>
+        <form class="interest-form">
+          <label>Nome<input name="name" autocomplete="name" required maxlength="120" /></label>
+          <label>WhatsApp<input name="whatsapp" type="tel" autocomplete="tel" required maxlength="30" placeholder="(11) 99999-9999" /></label>
+          <input name="product" type="hidden" required />
+          <div class="interest-form-row">
+            <fieldset class="size-field" style="margin:0;padding:0;border:0">
+              <legend style="margin-bottom:6px;color:#ddd;font-size:12px;font-weight:700">Tamanho</legend>
+              <div class="size-options">
+                <input id="size-pp" type="radio" name="size" value="PP" required /><label for="size-pp">PP</label>
+                <input id="size-p" type="radio" name="size" value="P" /><label for="size-p">P</label>
+                <input id="size-m" type="radio" name="size" value="M" /><label for="size-m">M</label>
+                <input id="size-g" type="radio" name="size" value="G" /><label for="size-g">G</label>
+                <input id="size-gg" type="radio" name="size" value="GG" /><label for="size-gg">GG</label>
+                <input id="size-xgg" type="radio" name="size" value="XGG" /><label for="size-xgg">XGG</label>
+                <input id="size-single" type="radio" name="size" value="Único" /><label for="size-single">Único</label>
+              </div>
+            </fieldset>
+            <label>Quantidade<input name="quantity" type="number" min="1" max="99" value="1" required /></label>
+          </div>
+          <button class="interest-submit" type="submit">Enviar interesse</button>
+          <p class="interest-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </dialog>
+    <iframe name="interest-submit-frame" title="Envio do formulário" hidden></iframe>
+    <script>
+      // URL gerada ao implantar o Apps Script como Web App.
+      const INTEREST_ENDPOINT = "CONFIGURE_APPS_SCRIPT_WEB_APP_URL";
+      const interestDialog = document.querySelector(".interest-dialog");
+      const interestForm = document.querySelector(".interest-form");
+      const productField = interestForm.elements.product;
+      const sizeOptions = document.querySelector(".size-options");
+      const sizeRadios = [...interestForm.querySelectorAll('input[name="size"]')];
+      const previewImage = document.querySelector(".interest-preview-image");
+      const previewName = document.querySelector(".interest-preview-name");
+      const interestStatus = document.querySelector(".interest-status");
+      const submitFrame = document.querySelector('[name="interest-submit-frame"]');
+      const productCards = [...document.querySelectorAll(".product-card[data-product]")];
+      productCards.forEach((card) => {
+        card.querySelector(".interest-button").addEventListener("click", () => {
+          productField.value = card.dataset.product;
+          previewName.textContent = card.dataset.product;
+          const frontImage = getComputedStyle(card).getPropertyValue("--product-front").trim();
+          previewImage.src = frontImage.replace(/^url\(["']?/, "").replace(/["']?\)$/, "");
+          previewImage.alt = `Prévia do produto ${card.dataset.product}`;
+          const isCap = card.dataset.product === "Boné";
+          document.querySelector(".size-field").hidden = false;
+          sizeOptions.hidden = false;
+          sizeRadios.forEach((radio) => {
+            radio.required = !isCap && radio.value === "PP";
+            radio.checked = isCap && radio.value === "Único";
+            radio.nextElementSibling.hidden = isCap ? radio.value !== "Único" : radio.value === "Único";
+          });
+          interestStatus.textContent = "";
+          interestStatus.removeAttribute("data-state");
+          interestDialog.showModal();
+        });
+      });
+      document.querySelector(".interest-close").addEventListener("click", () => interestDialog.close());
+      interestDialog.addEventListener("click", (event) => {
+        if (event.target === interestDialog) interestDialog.close();
+      });
+      window.addEventListener("message", (event) => {
+        if (event.source !== submitFrame.contentWindow || event.data?.type !== "diretoria-interest") return;
+        const submitButton = interestForm.querySelector("[type=submit]");
+        submitButton.disabled = false;
+        interestStatus.textContent = event.data.ok
+          ? "Interesse registrado. Obrigada!"
+          : "Não foi possível registrar agora. Confira os dados e tente novamente.";
+        interestStatus.dataset.state = event.data.ok ? "success" : "error";
+        if (event.data.ok) interestForm.reset();
+      });
+      interestForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(INTEREST_ENDPOINT)) {
+          interestStatus.textContent = "A lista de interesse ainda está sendo conectada à planilha.";
+          interestStatus.dataset.state = "error";
+          return;
+        }
+        const submitButton = interestForm.querySelector("[type=submit]");
+        submitButton.disabled = true;
+        interestStatus.textContent = "Enviando…";
+        interestStatus.removeAttribute("data-state");
+        interestForm.action = INTEREST_ENDPOINT;
+        interestForm.method = "post";
+        interestForm.target = "interest-submit-frame";
+        interestForm.submit();
+      });
+      function loadInterestTotals() {
+        if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(INTEREST_ENDPOINT)) return;
+        const callback = `interestCallback${Date.now()}`;
+        window[callback] = (totals) => {
+          productCards.forEach((card) => {
+            const total = totals[card.dataset.product];
+            if (!total) return;
+            const units = Number(total.units) || 0;
+            const people = Number(total.people) || 0;
+            const minimum = Number(total.minimum) || 0;
+            const remaining = Math.max(minimum - units, 0);
+            const summary = card.querySelector("[data-interest-summary]");
+            summary.textContent = minimum
+              ? `${people} ${people === 1 ? "pessoa" : "pessoas"} · ${units} de ${minimum} unidades · faltam ${remaining}`
+              : `${people} ${people === 1 ? "pessoa" : "pessoas"} · ${units} ${units === 1 ? "unidade" : "unidades"} na lista`;
+          });
+          delete window[callback];
+        };
+        const script = document.createElement("script");
+        script.src = `${INTEREST_ENDPOINT}?action=totals&callback=${callback}`;
+        script.onerror = () => { delete window[callback]; };
+        document.head.append(script);
+      }
+      loadInterestTotals();
+    </script>
   </body>
 </html>
