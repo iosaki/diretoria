@@ -31,6 +31,7 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://diretoria-site.s3.us-east-2.amazonaws.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -1153,6 +1154,7 @@
           : window.matchMedia("(max-width: 780px)").matches
             ? 6
             : 10;
+      const isMosaicMobile = () => window.matchMedia("(max-width: 700px)").matches;
       let mosaicColumnCount = null;
       const mosaicVisibleVideos = new Set();
       function syncMosaicPlayback() {
@@ -1189,7 +1191,7 @@
             if (isIntersecting) {
               if (!video.src) {
                 video.src = video.dataset.src;
-                video.preload = "auto";
+                video.preload = isMosaicMobile() ? "metadata" : "auto";
                 video.load();
               }
               if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
@@ -1198,7 +1200,7 @@
             }
           });
         },
-        { rootMargin: "500px 0px", threshold: 0.01 },
+        { rootMargin: isMosaicMobile() ? "700px 0px" : "500px 0px", threshold: 0.01 },
       );
       const mosaicVisibilityObserver = new IntersectionObserver(
         (entries) => {
