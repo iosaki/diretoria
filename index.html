@@ -501,6 +501,14 @@
         object-position: center;
         transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
       }
+      .mosaic-card video {
+        opacity: 0;
+        transition: opacity 0.25s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+        backface-visibility: hidden;
+      }
+      .mosaic-card video.is-ready {
+        opacity: 1;
+      }
       .mosaic-card:hover img,
       .mosaic-card:hover video {
         transform: scale(1.045);
@@ -1144,6 +1152,53 @@
           : window.matchMedia("(max-width: 780px)").matches
             ? 6
             : 10;
+      let mosaicColumnCount = null;
+      const mosaicNearViewport = new Set();
+      function syncMosaicPlayback() {
+        if (document.hidden) {
+          mosaicNearViewport.forEach((video) => video.pause());
+          return;
+        }
+        const viewportVideos = [...mosaicNearViewport]
+          .filter((video) => {
+            const rect = video.getBoundingClientRect();
+            return rect.bottom > 0 && rect.top < window.innerHeight && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
+          })
+          .sort((a, b) => {
+            const center = window.innerHeight / 2;
+            const aRect = a.getBoundingClientRect();
+            const bRect = b.getBoundingClientRect();
+            return Math.abs((aRect.top + aRect.bottom) / 2 - center) - Math.abs((bRect.top + bRect.bottom) / 2 - center);
+          });
+        const playbackLimit = mosaicColumnCount === 4 ? 4 : mosaicColumnCount === 6 ? 6 : 10;
+        const playingVideos = new Set(viewportVideos.slice(0, playbackLimit));
+        mosaicNearViewport.forEach((video) => {
+          if (playingVideos.has(video)) video.play().catch(() => {});
+          else video.pause();
+        });
+      }
+      const mosaicObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(({ target: video, isIntersecting }) => {
+            if (isIntersecting) {
+              mosaicNearViewport.add(video);
+              if (!video.src) {
+                video.src = video.dataset.src;
+                video.preload = "auto";
+                video.load();
+              }
+              if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                video.classList.add("is-ready");
+              }
+            } else {
+              mosaicNearViewport.delete(video);
+              video.pause();
+            }
+          });
+          syncMosaicPlayback();
+        },
+        { rootMargin: "220px 0px", threshold: 0.01 },
+      );
       const shuffleMosaicItems = (items) => {
         const shuffled = [...items];
         for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -1158,11 +1213,10 @@
       function populateMosaic() {
         if (!mosaicGrid || !mosaicMedia.length) return;
         const columnCount = getMosaicColumnCount();
-        mosaicGrid.querySelectorAll("video").forEach((video) => {
-          video.pause();
-          video.removeAttribute("src");
-          video.load();
-        });
+        if (columnCount === mosaicColumnCount) return;
+        mosaicColumnCount = columnCount;
+        mosaicObserver.disconnect();
+        mosaicNearViewport.clear();
         mosaicGrid.replaceChildren();
 
         const repeatsCutoffColumns = columnCount === 10;
@@ -1193,33 +1247,38 @@
             video.muted = true;
             video.loop = true;
             video.playsInline = true;
-            video.autoplay = true;
-            video.preload = "metadata";
+            video.preload = "none";
+            video.dataset.src = src;
             video.setAttribute("aria-hidden", "true");
-            video.addEventListener("error", () => {
-              console.error(
-                `Falha ao carregar vídeo do mosaico: ${src}`,
-                video.error,
-              );
+            video.addEventListener("loadeddata", () => {
+              video.classList.add("is-ready");
+              syncMosaicPlayback();
             });
-            video.src = src;
+            video.addEventListener("error", () => {
+              console.error(`Falha ao carregar vídeo do mosaico: ${src}`, video.error);
+            });
             card.append(video);
             column.append(card);
-            video.play().catch((error) => {
-              console.warn(
-                `Reprodução recusada no mosaico: ${src}`,
-                error.name,
-                error.message,
-              );
-            });
+            mosaicObserver.observe(video);
           });
         });
       }
       populateMosaic();
       let mosaicResizeTimer = null;
+      let mosaicPlaybackFrame = 0;
+      window.addEventListener("scroll", () => {
+        if (mosaicPlaybackFrame) return;
+        mosaicPlaybackFrame = window.requestAnimationFrame(() => {
+          mosaicPlaybackFrame = 0;
+          syncMosaicPlayback();
+        });
+      }, { passive: true });
       window.addEventListener("resize", () => {
         window.clearTimeout(mosaicResizeTimer);
         mosaicResizeTimer = window.setTimeout(populateMosaic, 180);
+      });
+      document.addEventListener("visibilitychange", () => {
+        syncMosaicPlayback();
       });
     </script>
   </body>
