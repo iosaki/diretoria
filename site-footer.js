@@ -28,6 +28,8 @@
           .bottom p { margin: 0; }
           @media (max-width: 520px) {
             footer { padding: 10px 24px 8px; }
+            .main { justify-content: center; }
+            .brand { display: none; }
             .brand img { width: 34px; height: 34px; }
             .brand-name { font-size: 20px; }
             .social { min-height: 40px; gap: 8px; }

@@ -219,6 +219,8 @@
         gap: 18px;
       }
       .product-card {
+        display: flex;
+        flex-direction: column;
         min-width: 0;
         border: 1px solid #343034;
         background: #171517;
@@ -327,6 +329,8 @@
         font-weight: 800;
       }
       .product-interest {
+        width: 100%;
+        margin-top: auto;
         padding: 0 18px 18px;
       }
       .product-interest-summary {
@@ -664,6 +668,7 @@
         }
         .products-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-auto-rows: 1fr;
           gap: 12px;
         }
         .products-heading {
@@ -677,9 +682,9 @@
           padding-top: 124px;
         }
         .product-card-info {
-          align-items: flex-end;
-          flex-direction: row;
-          gap: 12px;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 5px;
           padding: 14px;
         }
       }
