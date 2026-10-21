@@ -1,0 +1,75 @@
+:root {
+  --text-caption: 0.75rem;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: 1.125rem;
+}
+
+body {
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+
+.footer-intro,
+.footer-contact,
+.footer-links a,
+.footer-contact a {
+  font-size: var(--text-small);
+  line-height: 1.6;
+}
+
+.footer-col h2 {
+  font-size: var(--text-caption);
+  letter-spacing: 0.12em;
+}
+
+.footer-brand .brand-name small,
+.brand-name small {
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+}
+
+.footer-bottom,
+.footer-social a {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+}
+
+.social-wall-heading p:last-child,
+.home-link p,
+.products-heading > p {
+  font-size: var(--text-small);
+  line-height: 1.6;
+}
+
+.product-kind {
+  font-size: var(--text-caption);
+}
+
+.product-name {
+  font-size: var(--text-body);
+}
+
+.product-price {
+  font-size: var(--text-body);
+}
+
+.fixture-date,
+.fixture-note {
+  font-size: var(--text-caption);
+}
+
+.fixture-team {
+  font-size: var(--text-small);
+}
+
+.fixture-status {
+  font-size: 0.6875rem;
+}
+
+@media (max-width: 780px) {
+  .fixture-team {
+    font-size: var(--text-caption);
+  }
+}

@@ -252,7 +252,7 @@
       }
       .hero-title .word-only,
       .hero-title .word-football {
-        top: 53%;
+        top: 55%;
         color: #eee0d2;
         font-size: 1.22em;
       }
@@ -410,12 +410,8 @@
       .social-wall-eyebrow { margin: 0 0 10px; color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
       .social-wall h2 { margin: 0; font-family: var(--display); font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -.035em; line-height: .9; text-transform: uppercase; }
       .social-wall-heading p:last-child { max-width: 310px; margin: 0; color: #aaa; font-size: 13px; line-height: 1.6; }
-      .mosaic-grid { display: grid; width: 116%; height: clamp(100svh, 100vh, 980px); margin-left: -8%; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 10px; overflow: hidden; }
-      .mosaic-column { min-width: 0; overflow: hidden; transform: rotate(2deg) scale(1.01); transform-origin: center; }
-      .mosaic-track, .mosaic-sequence { display: flex; flex-direction: column; gap: 10px; }
-      .mosaic-track { animation: mosaic-up var(--mosaic-duration, 32s) linear infinite; will-change: transform; }
-      .mosaic-column:nth-child(odd) .mosaic-track { animation-name: mosaic-down; }
-      .mosaic-sequence { flex: 0 0 auto; }
+      .mosaic-grid { display: grid; width: 116%; min-height: clamp(100svh, 100vh, 980px); height: auto; align-content: center; margin-left: -8%; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 10px; overflow: hidden; }
+      .mosaic-column { display: flex; min-width: 0; flex-direction: column; gap: 10px; overflow: hidden; transform: rotate(2deg) scale(1.01); transform-origin: center; }
       .mosaic-card { position: relative; aspect-ratio: .5; margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 11px; background: #171517; }
       .mosaic-card img, .mosaic-card video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
       .mosaic-card:hover img, .mosaic-card:hover video { transform: scale(1.045); }
@@ -433,8 +429,6 @@
       .home-link-bottom { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
       .home-link h3 { margin: 0 0 8px; font-family: var(--display); font-size: clamp(26px, 3vw, 40px); font-weight: 800; letter-spacing: -.025em; line-height: .95; text-transform: uppercase; }
       .home-link p { max-width: 250px; margin: 0; color: #aaa; font-size: 13px; line-height: 1.5; }
-      @keyframes mosaic-up { from { transform: translateY(0); } to { transform: translateY(calc(0px - var(--mosaic-shift))); } }
-      @keyframes mosaic-down { from { transform: translateY(calc(0px - var(--mosaic-shift))); } to { transform: translateY(0); } }
       .fixtures { padding: 84px clamp(24px, 6vw, 92px) 96px; border-top: 1px solid #333; background: #111; color: #fff; }
       .fixtures-inner { max-width: 1392px; margin: 0 auto; }
       .fixtures-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
@@ -586,7 +580,8 @@
         .home-link p { max-width: 290px; }
         .social-wall-heading { align-items: flex-start; flex-direction: column; gap: 14px; }
         .social-wall-heading p:last-child { max-width: 420px; }
-        .mosaic-grid { width: 120%; height: 100svh; margin-left: -10%; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+        .mosaic-grid { width: 120%; margin-left: -10%; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+        .mosaic-column { gap: 8px; }
         .fixtures { padding: 64px clamp(24px, 6vw, 92px) 72px; }
         .fixtures-heading { align-items: flex-start; flex-direction: column; gap: 22px; }
         .fixtures-tabs { width: 100%; }
@@ -655,7 +650,7 @@
         }
         .hero-title .word-only,
         .hero-title .word-football {
-          top: 53%;
+          top: 56%;
           font-size: 1.75em;
         }
         .hero-title .word-left {
@@ -682,7 +677,8 @@
         .footer-main { gap: 22px; }
       }
       @media (max-width: 700px) {
-        .mosaic-grid { width: 124%; height: 100svh; margin-left: -12%; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+        .mosaic-grid { width: 124%; margin-left: -12%; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+        .mosaic-column { gap: 7px; }
         .mosaic-card { aspect-ratio: .42; }
       }
       @media (max-width: 480px) {
@@ -699,7 +695,7 @@
         }
         .hero-title .word-only,
         .hero-title .word-football {
-          top: 53%;
+          top: 56%;
           font-size: 1.75em;
         }
         .hero-title .word-only {
@@ -746,6 +742,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="site-typography.css" />
     <script src="site-header.js" defer></script>
   </head>
   <body>
@@ -798,7 +795,7 @@
             href="#inicio"
             aria-label="Diretoria — voltar ao início"
             ><img src="logo-diretoria.png" alt="" /><span class="brand-name"
-              >Diretoria<small>Futsal feminino<br />desde 2022</small></span
+              >Diretoria<small>Futsal feminino</small></span
             ></a
           >
         </div>
@@ -833,18 +830,28 @@
     <script>
       const mosaicGrid = document.querySelector("#mosaic-grid");
       const mosaicMedia = [
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/008.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/003.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/011.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/005.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/001.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/009.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/004.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/010.MP4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/006.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/002.mp4", type: "video" },
-        { src: "https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/mosaic/007.mp4", type: "video" },
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/001.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/002.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/003.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/004.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/005.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/006.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/007.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/008.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/009.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/010.MP4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/011.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/012.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/013.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/014.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/015.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/016.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/017.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/018.mp4",
+        "https://diretoria-site.s3.us-east-2.amazonaws.com/site/mosaic/019.mp4",
       ];
+      const getMosaicColumnCount = () =>
+        window.matchMedia("(max-width: 700px)").matches ? 4 : window.matchMedia("(max-width: 780px)").matches ? 6 : 10;
       const shuffleMosaicItems = (items) => {
         const shuffled = [...items];
         for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -853,155 +860,61 @@
         }
         return shuffled;
       };
-      let mosaicFrameTimer = null;
-      let mosaicResizeTimer = null;
-      let lastMosaicSize = null;
       function populateMosaic() {
         if (!mosaicGrid || !mosaicMedia.length) return;
-        if (mosaicFrameTimer) window.clearTimeout(mosaicFrameTimer);
+        const columnCount = getMosaicColumnCount();
         mosaicGrid.querySelectorAll("video").forEach((video) => {
           video.pause();
           video.removeAttribute("src");
           video.load();
         });
         mosaicGrid.replaceChildren();
-        const items = shuffleMosaicItems(mosaicMedia);
-        const mosaicCanvases = [];
-        const sourceVideos = items.map((item) => {
-          const video = document.createElement("video");
-          video.muted = true;
-          video.defaultMuted = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.autoplay = true;
-          video.preload = "auto";
-          video.setAttribute("autoplay", "");
-          video.setAttribute("muted", "");
-          video.setAttribute("playsinline", "");
-          video.setAttribute("webkit-playsinline", "");
-          video.setAttribute("loop", "");
-          const tryPlay = () => video.play().catch((error) => {
-            console.warn(`Reprodução recusada no mosaico: ${item.src}`, error.name, error.message);
-          });
-          const startPlayback = () => {
-            if (video.isConnected) tryPlay();
-          };
-          video.addEventListener("loadedmetadata", () => {
-            video.currentTime = 0;
-            console.info(`Metadados carregados: ${item.src}`, `${video.videoWidth}x${video.videoHeight}`);
-          }, { once: true });
-          video.addEventListener("loadeddata", startPlayback);
-          video.addEventListener("canplay", startPlayback);
-          video.addEventListener("error", () => {
-            console.error(`Falha ao carregar vídeo do mosaico: ${item.src}`, video.error);
-          });
-          video.src = item.src;
-          return video;
-        });
-        const placedSourceVideos = new Set();
-        const maxColumnCount = window.matchMedia("(max-width: 700px)").matches ? 4 : window.matchMedia("(max-width: 780px)").matches ? 6 : 10;
-        const columnCount = maxColumnCount;
-        mosaicGrid.style.gridTemplateColumns = `repeat(${columnCount}, minmax(0, 1fr))`;
-        const gridStyles = window.getComputedStyle(mosaicGrid);
-        const columnGap = parseFloat(gridStyles.columnGap) || 0;
-        const cardGap = 10;
-        const defaultRowCount = window.matchMedia("(max-width: 700px)").matches ? 3 : 2;
-        const rowCount = Math.max(defaultRowCount, Math.ceil(items.length / columnCount));
-        const cardAspectRatio = window.matchMedia("(max-width: 700px)").matches ? 0.42 : 0.5;
-        const columnWidth = (mosaicGrid.clientWidth - columnGap * (columnCount - 1)) / columnCount;
-        const cardHeight = columnWidth / cardAspectRatio;
-        const sequenceHeight = rowCount * cardHeight + (rowCount - 1) * cardGap;
-        const sequenceStride = sequenceHeight + cardGap;
-        const copyCount = Math.max(2, Math.ceil((mosaicGrid.clientHeight + cardGap) / sequenceStride) + 1);
 
-        for (let columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+        const repeatsCutoffColumns = columnCount === 10;
+        const centerColumnCount = repeatsCutoffColumns ? 8 : columnCount;
+        const centerColumns = Array.from({ length: centerColumnCount }, () => []);
+        shuffleMosaicItems(mosaicMedia).forEach((src, index) => {
+          centerColumns[index % centerColumnCount].push(src);
+        });
+        const edgeColumnSources = repeatsCutoffColumns
+          ? shuffleMosaicItems(centerColumns).slice(0, 2)
+          : [];
+        const columns = repeatsCutoffColumns
+          ? [edgeColumnSources[0], ...centerColumns, edgeColumnSources[1]]
+          : centerColumns;
+
+        columns.forEach((sources) => {
           const column = document.createElement("div");
-          const track = document.createElement("div");
           column.className = "mosaic-column";
           column.setAttribute("aria-hidden", "true");
-          track.className = "mosaic-track";
-          track.style.setProperty("--mosaic-duration", `${55 * rowCount / 4}s`);
-
-            let firstSequence = null;
-            for (let copy = 0; copy < copyCount; copy += 1) {
-              const sequence = document.createElement("div");
-              sequence.className = "mosaic-sequence";
-              for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
-                const mediaIndex = (columnIndex * rowCount + rowIndex) % items.length;
-                const card = document.createElement("figure");
-                card.className = "mosaic-card";
-                if (!placedSourceVideos.has(mediaIndex)) {
-                  const video = sourceVideos[mediaIndex];
-                  video.setAttribute("aria-hidden", "true");
-                  card.append(video);
-                  placedSourceVideos.add(mediaIndex);
-                } else {
-                  const canvas = document.createElement("canvas");
-                  canvas.width = 240;
-                  canvas.height = 480;
-                  canvas.setAttribute("aria-hidden", "true");
-                  mosaicCanvases.push({ canvas, context: canvas.getContext("2d"), video: sourceVideos[mediaIndex] });
-                  card.append(canvas);
-                }
-                sequence.append(card);
-              }
-              if (copy === 0) firstSequence = sequence;
-              track.append(sequence);
-            }
-
-            column.append(track);
-            mosaicGrid.append(column);
-            track.style.setProperty("--mosaic-shift", `${firstSequence.offsetHeight + cardGap}px`);
-        }
-
-        sourceVideos.forEach((video, index) => {
-          video.play().catch((error) => {
-            console.warn(`Reprodução recusada no mosaico: ${items[index].src}`, error.name, error.message);
+          mosaicGrid.append(column);
+          sources.forEach((src) => {
+            const card = document.createElement("figure");
+            const video = document.createElement("video");
+            card.className = "mosaic-card";
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            video.autoplay = true;
+            video.preload = "metadata";
+            video.setAttribute("aria-hidden", "true");
+            video.addEventListener("error", () => {
+              console.error(`Falha ao carregar vídeo do mosaico: ${src}`, video.error);
+            });
+            video.src = src;
+            card.append(video);
+            column.append(card);
+            video.play().catch((error) => {
+              console.warn(`Reprodução recusada no mosaico: ${src}`, error.name, error.message);
+            });
           });
         });
-
-        const drawVideoFrames = () => {
-          mosaicCanvases.forEach(({ canvas, context, video }) => {
-            if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || !context || !video.videoWidth || !video.videoHeight) return;
-            try {
-              const sourceRatio = video.videoWidth / video.videoHeight;
-              const canvasRatio = canvas.width / canvas.height;
-              let cropX = 0;
-              let cropY = 0;
-              let cropWidth = video.videoWidth;
-              let cropHeight = video.videoHeight;
-              if (sourceRatio > canvasRatio) {
-                cropWidth = video.videoHeight * canvasRatio;
-                cropX = (video.videoWidth - cropWidth) / 2;
-              } else {
-                cropHeight = video.videoWidth / canvasRatio;
-                cropY = (video.videoHeight - cropHeight) / 2;
-              }
-              context.drawImage(video, cropX, cropY, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
-            } catch (error) {
-              console.warn(`Quadro do mosaico ignorado: ${video.currentSrc}`, error);
-            }
-          });
-          mosaicFrameTimer = window.setTimeout(drawVideoFrames, 100);
-        };
-        mosaicFrameTimer = window.setTimeout(drawVideoFrames, 100);
-
       }
       populateMosaic();
-      lastMosaicSize = { width: window.innerWidth, height: mosaicGrid?.clientHeight ?? 0 };
+      let mosaicResizeTimer = null;
       window.addEventListener("resize", () => {
         window.clearTimeout(mosaicResizeTimer);
-        mosaicResizeTimer = window.setTimeout(() => {
-          const nextSize = { width: window.innerWidth, height: mosaicGrid?.clientHeight ?? 0 };
-          if (
-            !lastMosaicSize ||
-            Math.abs(nextSize.width - lastMosaicSize.width) > 16 ||
-            Math.abs(nextSize.height - lastMosaicSize.height) > 160
-          ) {
-            lastMosaicSize = nextSize;
-            populateMosaic();
-          }
-        }, 180);
+        mosaicResizeTimer = window.setTimeout(populateMosaic, 180);
       });
     </script>
   </body>

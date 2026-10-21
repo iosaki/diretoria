@@ -233,6 +233,21 @@
         --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-quatro.png");
         --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/manto-quatro-verso.png");
       }
+      .product-card.cap {
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/bone.png");
+      }
+      .product-card.top {
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/top.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/top-verso.png");
+      }
+      .product-card.windbreaker {
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/cortavento.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/cortavento-verso.png");
+      }
+      .product-card.sweatshirt {
+        --product-front: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/moletom.png");
+        --product-back: url("https://diretoria-site.s3.us-east-2.amazonaws.com/site/store/moletom-verso.png");
+      }
       .product-card-visual {
         position: relative;
         display: grid;
@@ -270,9 +285,16 @@
       .product-card:focus-within .product-card-visual::before {
         opacity: 0;
       }
+      .product-card.cap .product-card-visual::after {
+        display: none;
+      }
+      .product-card.cap:hover .product-card-visual::before,
+      .product-card.cap:focus-within .product-card-visual::before {
+        opacity: 1;
+      }
       .product-card-info {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
         gap: 14px;
         padding: 17px 18px 19px;
@@ -292,16 +314,11 @@
         font-size: 14px;
         font-weight: 700;
       }
-      .product-contact {
+      .product-price {
         flex: 0 0 auto;
         color: #fff;
-        font-size: 9px;
+        font-size: 16px;
         font-weight: 800;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      .product-contact:hover {
-        color: var(--red);
       }
       .site-footer {
         padding: 30px clamp(24px, 6vw, 92px) 18px;
@@ -456,8 +473,8 @@
           padding-top: 124px;
         }
         .product-card-info {
-          align-items: flex-start;
-          flex-direction: column;
+          align-items: flex-end;
+          flex-direction: row;
           gap: 12px;
           padding: 14px;
         }
@@ -482,6 +499,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="site-typography.css" />
     <script src="site-header.js" defer></script>
   </head>
   <body>
@@ -508,11 +526,7 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto I</p>
                 </div>
-                <a
-                  class="product-contact"
-                  href="mailto:oi@diretoriaffc.com.br?subject=Manto%20I"
-                  >Consultar ↗</a
-                >
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
             </article>
             <article class="product-card manto-two">
@@ -526,11 +540,7 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto II</p>
                 </div>
-                <a
-                  class="product-contact"
-                  href="mailto:oi@diretoriaffc.com.br?subject=Manto%20II"
-                  >Consultar ↗</a
-                >
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
             </article>
             <article class="product-card manto-three">
@@ -544,11 +554,7 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto III</p>
                 </div>
-                <a
-                  class="product-contact"
-                  href="mailto:oi@diretoriaffc.com.br?subject=Manto%20III"
-                  >Consultar ↗</a
-                >
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
             </article>
             <article class="product-card manto-four">
@@ -562,11 +568,63 @@
                   <p class="product-kind">Uniforme oficial</p>
                   <p class="product-name">Manto IV</p>
                 </div>
-                <a
-                  class="product-contact"
-                  href="mailto:oi@diretoriaffc.com.br?subject=Manto%20IV"
-                  >Consultar ↗</a
-                >
+                <p class="product-price">R$ 92,90</p>
+              </div>
+            </article>
+            <article class="product-card cap">
+              <div
+                class="product-card-visual"
+                role="img"
+                aria-label="Boné oficial da Diretoria"
+              ></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Acessório</p>
+                  <p class="product-name">Boné</p>
+                </div>
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+              </div>
+            </article>
+            <article class="product-card top">
+              <div
+                class="product-card-visual"
+                role="img"
+                aria-label="Top esportivo da Diretoria, frente e verso"
+              ></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Vestuário esportivo</p>
+                  <p class="product-name">Top</p>
+                </div>
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+              </div>
+            </article>
+            <article class="product-card windbreaker">
+              <div
+                class="product-card-visual"
+                role="img"
+                aria-label="Corta-vento da Diretoria, frente e verso"
+              ></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Vestuário esportivo</p>
+                  <p class="product-name">Corta-vento</p>
+                </div>
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
+              </div>
+            </article>
+            <article class="product-card sweatshirt">
+              <div
+                class="product-card-visual"
+                role="img"
+                aria-label="Moletom da Diretoria, frente e verso"
+              ></div>
+              <div class="product-card-info">
+                <div>
+                  <p class="product-kind">Vestuário</p>
+                  <p class="product-name">Moletom</p>
+                </div>
+                <p class="product-price" aria-label="Preço ainda não definido">-</p>
               </div>
             </article>
           </div>
@@ -584,7 +642,7 @@
             href="index.html#inicio"
             aria-label="Diretoria — voltar ao início"
             ><img src="logo-diretoria.png" alt="" /><span class="brand-name"
-              >Diretoria<small>Futsal feminino<br />desde 2022</small></span
+              >Diretoria<small>Futsal feminino</small></span
             ></a
           >
         </div>
