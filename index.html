@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (window.location.pathname.endsWith("/index.html")) {
+        const cleanPath = window.location.pathname.slice(0, -"index.html".length);
+        window.history.replaceState(null, "", `${cleanPath}${window.location.search}${window.location.hash}`);
+      }
+    </script>
     <meta name="theme-color" content="#111111" />
     <meta
       name="description"
@@ -20,10 +26,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=photo_camera"
       rel="stylesheet"
     />
     <style>
@@ -417,9 +419,9 @@
       .mosaic-card { position: relative; aspect-ratio: .5; margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 11px; background: #171517; }
       .mosaic-card img, .mosaic-card video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
       .mosaic-card:hover img, .mosaic-card:hover video { transform: scale(1.045); }
-      .home-links { position: relative; display: flex; min-height: 72svh; align-items: center; overflow: hidden; padding: 88px clamp(24px, 7vw, 104px); background: var(--red); color: #fff; isolation: isolate; }
+      .home-links { position: relative; display: flex; min-height: 72svh; align-items: center; overflow: hidden; padding: 88px clamp(24px, 6vw, 92px); background: var(--red); color: #fff; isolation: isolate; }
       .home-links::before { position: absolute; z-index: -1; inset: 0; background-image: url("linha-pontilhada.svg"); background-size: 24px 100%; background-repeat: repeat-x; filter: brightness(0) invert(1) blur(.65px); content: ""; mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); }
-      .home-links-inner { width: 100%; max-width: 1280px; margin: 0 auto; }
+      .home-links-inner { width: 100%; max-width: 1392px; margin: 0 auto; }
       .home-links-heading { margin-bottom: 38px; }
       .home-links-eyebrow { margin: 0 0 12px; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
       .home-links-title { margin: 0; color: #fff; font-family: var(--display); font-size: clamp(38px, 6vw, 72px); font-weight: 800; letter-spacing: -.035em; line-height: .95; text-transform: uppercase; }
@@ -434,7 +436,7 @@
       @keyframes mosaic-up { from { transform: translateY(0); } to { transform: translateY(calc(0px - var(--mosaic-shift))); } }
       @keyframes mosaic-down { from { transform: translateY(calc(0px - var(--mosaic-shift))); } to { transform: translateY(0); } }
       .fixtures { padding: 84px clamp(24px, 6vw, 92px) 96px; border-top: 1px solid #333; background: #111; color: #fff; }
-      .fixtures-inner { max-width: 1120px; margin: 0 auto; }
+      .fixtures-inner { max-width: 1392px; margin: 0 auto; }
       .fixtures-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
       .fixtures-eyebrow { margin: 0 0 10px; color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
       .fixtures h2 { margin: 0; font-family: var(--display); font-size: clamp(42px, 6vw, 72px); font-weight: 800; letter-spacing: -.035em; line-height: .9; text-transform: uppercase; }
@@ -521,9 +523,10 @@
       .footer-links a:focus-visible {
         color: var(--red);
       }
-      .footer-instagram { display: inline-grid; width: 38px; height: 38px; place-items: center; border: 1px solid #d8d5d0; border-radius: 50%; color: var(--ink); transition: border-color .2s, background .2s, color .2s; }
-      .footer-instagram:hover, .footer-instagram:focus-visible { border-color: var(--red); background: var(--red); color: #fff; }
-      .footer-instagram .material-symbols-outlined { font-size: 20px; }
+      .footer-instagram { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; transition: background .2s; }
+      .footer-instagram img { display: block; width: 20px; height: 20px; }
+      .footer-instagram:hover, .footer-instagram:focus-visible { background: var(--red); }
+      .footer-instagram:hover img, .footer-instagram:focus-visible img { filter: brightness(0) invert(1); }
       .footer-contact {
         color: #4d4945;
         font-size: 13px;
@@ -727,6 +730,7 @@
         .site-footer { padding: 24px 20px 16px; }
         .footer-main { grid-template-columns: 1fr 1fr; gap: 22px 18px; padding-bottom: 20px; }
         .footer-brand-block { grid-column: 1 / -1; }
+        .footer-col:last-child { grid-column: 2; }
         .footer-col h2 { margin-bottom: 10px; }
         .footer-bottom {
           flex-wrap: wrap;
@@ -744,6 +748,7 @@
         }
       }
     </style>
+    <script src="site-header.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -757,26 +762,7 @@
             ><span class="word-right word-football">futebol.</span>
           </h1>
         </div>
-        <header class="site-header">
-          <a class="brand" href="#inicio" aria-label="Diretoria — início">
-            <img src="logo-diretoria.png" alt="" />
-          </a>
-          <button
-            class="menu-toggle"
-            type="button"
-            aria-label="Abrir menu"
-            aria-expanded="false"
-            aria-controls="site-nav"
-          >
-            <span></span><span></span>
-          </button>
-          <nav class="nav" id="site-nav" aria-label="Navegação principal">
-            <a href="#inicio">Início</a><a href="manifesto.html">Manifesto</a
-            ><a href="jogos.html">Jogos</a
-            ><a href="loja.html" class="nav-cta">Loja oficial</a
-            >
-          </nav>
-        </header>
+        <diretoria-header></diretoria-header>
       </section>
       <section class="social-wall" id="momentos" aria-labelledby="social-wall-title">
         <div class="social-wall-inner">
@@ -790,15 +776,15 @@
             <h2 class="home-links-title" id="home-links-title">Dentro e fora da quadra</h2>
           </header>
           <nav class="home-links-grid" aria-label="Conheça mais sobre a Diretoria">
-            <a class="home-link" href="jogos.html">
+            <a class="home-link" href="jogos/index.html">
               <span class="home-link-index">01 / QUADRA</span>
               <span class="home-link-bottom"><span><h3>Jogos</h3><p>Próximos desafios, resultados e tudo que acontece em quadra.</p></span></span>
             </a>
-            <a class="home-link" href="manifesto.html">
+            <a class="home-link" href="manifesto/index.html">
               <span class="home-link-index">02 / ESSÊNCIA</span>
               <span class="home-link-bottom"><span><h3>Manifesto</h3><p>O que nos move, o que defendemos e por que jogamos.</p></span></span>
             </a>
-            <a class="home-link" href="loja.html">
+            <a class="home-link" href="loja/index.html">
               <span class="home-link-index">03 / MANTO</span>
               <span class="home-link-bottom"><span><h3>Loja oficial</h3><p>Vista as cores e leve um pedaço da Diretoria com você.</p></span></span>
             </a>
@@ -814,16 +800,15 @@
             href="#inicio"
             aria-label="Diretoria — voltar ao início"
             ><img src="logo-diretoria.png" alt="" /><span class="brand-name"
-              >Diretoria<small>Futsal feminino · desde 2022</small></span
+              >Diretoria<small>Futsal feminino<br />desde 2022</small></span
             ></a
           >
         </div>
         <div class="footer-col">
           <h2>Navegue</h2>
           <nav class="footer-links" aria-label="Links do rodapé">
-            <a href="#inicio">Início</a><a href="manifesto.html">Manifesto</a>
-            <a href="jogos.html">Jogos</a>
-            <a href="loja.html">Loja oficial</a>
+            <a href="#inicio">Início</a><a href="manifesto/index.html">Manifesto</a>
+            <a href="jogos/index.html">Jogos</a>
           </nav>
         </div>
         <div class="footer-col">
@@ -833,13 +818,13 @@
         <div class="footer-col">
           <h2>Loja oficial</h2>
           <nav class="footer-links" aria-label="Loja oficial">
-            <a href="loja.html">Acesse a loja</a>
+            <a href="loja/index.html">Acesse a loja</a>
           </nav>
         </div>
         <div class="footer-col">
           <h2>Redes sociais</h2>
           <div class="footer-links footer-social-links">
-            <a class="footer-instagram" href="https://instagram.com/diretoria.ffc/" target="_blank" rel="noreferrer" aria-label="Instagram da Diretoria" title="Instagram da Diretoria"><span class="material-symbols-outlined" aria-hidden="true">photo_camera</span></a>
+            <a class="footer-instagram" href="https://instagram.com/diretoria.ffc/" target="_blank" rel="noreferrer" aria-label="Instagram da Diretoria" title="Instagram da Diretoria"><img src="instagram-logo.svg" alt="" /></a>
           </div>
         </div>
       </div>
@@ -1020,24 +1005,6 @@
           }
         }, 180);
       });
-      const menuButton = document.querySelector(".menu-toggle");
-      const navigation = document.querySelector("#site-nav");
-      menuButton.addEventListener("click", () => {
-        const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-        menuButton.setAttribute("aria-expanded", String(!isOpen));
-        menuButton.setAttribute(
-          "aria-label",
-          isOpen ? "Abrir menu" : "Fechar menu",
-        );
-        navigation.classList.toggle("is-open", !isOpen);
-      });
-      navigation.querySelectorAll("a").forEach((link) =>
-        link.addEventListener("click", () => {
-          menuButton.setAttribute("aria-expanded", "false");
-          menuButton.setAttribute("aria-label", "Abrir menu");
-          navigation.classList.remove("is-open");
-        }),
-      );
     </script>
   </body>
 </html>
