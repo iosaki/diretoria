@@ -91,7 +91,7 @@ function getTotals_() {
   const requests = spreadsheet.getSheetByName(CONFIG.requestsSheet);
   const targets = spreadsheet.getSheetByName(CONFIG.targetsSheet);
   const totals = {};
-  CONFIG.products.forEach((product) => { totals[product] = { people: 0, units: 0, minimum: 0 }; });
+  CONFIG.products.forEach((product) => { totals[product] = { people: 0, orders: 0, units: 0, minimum: 0 }; });
 
   if (targets && targets.getLastRow() > 1) {
     targets.getRange(2, 1, targets.getLastRow() - 1, 2).getValues().forEach(([product, minimum]) => {
@@ -103,6 +103,7 @@ function getTotals_() {
     const peopleByProduct = {};
     rows.forEach(([, , whatsapp, product, , quantity]) => {
       if (!totals[product]) return;
+      totals[product].orders += 1;
       totals[product].units += Math.max(0, Number(quantity) || 0);
       if (!peopleByProduct[product]) peopleByProduct[product] = new Set();
       peopleByProduct[product].add(normalizePhone_(whatsapp));

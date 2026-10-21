@@ -22,6 +22,12 @@
     />
     <title>Loja — Diretoria Futsal</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://script.google.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://script.googleusercontent.com"
+      crossorigin
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -324,10 +330,70 @@
         padding: 0 18px 18px;
       }
       .product-interest-summary {
-        min-height: 18px;
-        margin: 0 0 10px;
+        min-height: 34px;
+        margin: 9px 0 10px;
         color: #aaa;
         font-size: 11px;
+        line-height: 1.45;
+      }
+      .product-interest-loading {
+        display: flex;
+        min-height: 34px;
+        align-items: center;
+        gap: 7px;
+        margin: 9px 0 10px;
+        color: #aaa;
+        font-size: 10px;
+      }
+      .product-interest-loading::before {
+        width: 11px;
+        height: 11px;
+        border: 1.5px solid #686168;
+        border-top-color: var(--red);
+        border-radius: 50%;
+        animation: interest-spin 0.8s linear infinite;
+        content: "";
+      }
+      @keyframes interest-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .product-interest-progress {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 9px;
+        margin-top: 2px;
+      }
+      .product-interest-progress[hidden] {
+        display: none !important;
+      }
+      .product-interest-count {
+        grid-column: 2;
+        grid-row: 1;
+        display: block;
+        min-width: 36px;
+        margin: 0;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+      }
+      .product-interest-track {
+        grid-column: 1;
+        grid-row: 1;
+        height: 6px;
+        overflow: hidden;
+        background: #393439;
+      }
+      .product-interest-fill {
+        display: block;
+        width: 0;
+        height: 100%;
+        background: var(--red);
+        transition: width 0.35s ease;
       }
       .interest-button,
       .interest-submit {
@@ -435,6 +501,46 @@
       .interest-form [hidden] {
         display: none !important;
       }
+      .interest-dialog [hidden] {
+        display: none !important;
+      }
+      .interest-success {
+        padding: 10px 0 4px;
+        text-align: center;
+      }
+      .interest-success-mark {
+        display: grid;
+        width: 58px;
+        height: 58px;
+        place-items: center;
+        margin: 4px auto 16px;
+        border: 1px solid #79c98b;
+        border-radius: 50%;
+        color: #9de0ad;
+        font-size: 30px;
+      }
+      .interest-success h3 {
+        margin: 0 0 8px;
+        font: 800 29px/1 var(--display);
+        text-transform: uppercase;
+      }
+      .interest-success p {
+        margin: 0 auto 22px;
+        color: #bbb;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .interest-success-close {
+        width: 100%;
+        min-height: 44px;
+        border: 1px solid #e91e27;
+        background: #e91e27;
+        color: #fff;
+        font: 700 12px var(--body);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
       .interest-form input {
         width: 100%;
         min-height: 44px;
@@ -508,93 +614,6 @@
           padding: 22px;
         }
       }
-      .site-footer {
-        padding: 30px clamp(24px, 6vw, 92px) 18px;
-        background: var(--paper);
-        color: var(--ink);
-      }
-      .footer-main {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
-        align-items: start;
-        gap: 30px;
-        max-width: 1392px;
-        margin: 0 auto;
-        padding-bottom: 26px;
-      }
-      .footer-brand-block {
-        align-self: center;
-      }
-      .footer-brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .footer-brand img {
-        width: 48px;
-        height: 48px;
-        object-fit: contain;
-      }
-      .brand-name {
-        color: var(--ink);
-        font-size: 23px;
-      }
-      .brand-name small {
-        display: block;
-        margin-top: 5px;
-        color: #77736e;
-        font-family: var(--body);
-        font-size: 8px;
-        font-weight: 600;
-        letter-spacing: 0.16em;
-      }
-      .footer-col h2 {
-        margin: 4px 0 12px;
-        color: #88837e;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-      .footer-links {
-        display: grid;
-        gap: 9px;
-      }
-      .footer-links a,
-      .footer-contact a {
-        width: fit-content;
-        color: var(--ink);
-        font-size: 13px;
-        font-weight: 600;
-      }
-      .footer-links a:hover,
-      .footer-contact a:hover {
-        color: var(--red);
-      }
-      .footer-instagram {
-        display: inline-flex;
-        width: 38px;
-        height: 38px;
-        align-items: center;
-        justify-content: center;
-      }
-      .footer-instagram img {
-        display: block;
-        width: 20px;
-        height: 20px;
-      }
-      .footer-bottom {
-        max-width: 1392px;
-        margin: 0 auto;
-        padding-top: 14px;
-        border-top: 1px solid #d8d5d0;
-        color: #77736e;
-        font-size: 10px;
-        text-align: center;
-      }
-      .footer-bottom p {
-        margin: 0;
-      }
       @media (max-width: 780px) {
         .site-header {
           height: 76px;
@@ -652,9 +671,6 @@
           flex-direction: column;
           gap: 12px;
         }
-        .footer-main {
-          gap: 22px;
-        }
       }
       @media (max-width: 520px) {
         .shop-products {
@@ -666,17 +682,6 @@
           gap: 12px;
           padding: 14px;
         }
-        .footer-main {
-          grid-template-columns: 1fr 1fr;
-          gap: 22px 18px;
-          padding-bottom: 20px;
-        }
-        .footer-brand-block {
-          grid-column: 1 / -1;
-        }
-        .footer-col:last-child {
-          grid-column: 2;
-        }
       }
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -684,11 +689,13 @@
         *::after {
           scroll-behavior: auto !important;
           transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
         }
       }
     </style>
     <link rel="stylesheet" href="site-typography.css" />
     <script src="site-header.js" defer></script>
+    <script src="site-footer.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="loja/#conteudo">Pular para o conteúdo</a>
@@ -712,7 +719,7 @@
               <div class="product-card-info">
                 <div>
                   <p class="product-kind">Uniforme oficial</p>
-                  <p class="product-name">Manto I</p>
+                  <p class="product-name">Manto I - Vermelho</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
                   -
@@ -736,7 +743,7 @@
               <div class="product-card-info">
                 <div>
                   <p class="product-kind">Uniforme oficial</p>
-                  <p class="product-name">Manto II</p>
+                  <p class="product-name">Manto II - Branco</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
                   -
@@ -760,7 +767,7 @@
               <div class="product-card-info">
                 <div>
                   <p class="product-kind">Uniforme oficial</p>
-                  <p class="product-name">Manto III</p>
+                  <p class="product-name">Manto III - Listrado</p>
                 </div>
                 <p class="product-price" aria-label="Preço ainda não definido">
                   -
@@ -784,7 +791,7 @@
               <div class="product-card-info">
                 <div>
                   <p class="product-kind">Uniforme oficial</p>
-                  <p class="product-name">Manto IV</p>
+                  <p class="product-name">Manto IV - Preto</p>
                 </div>
                 <p class="product-price">R$ 92,90</p>
               </div>
@@ -903,51 +910,7 @@
         Amizade, cervejinha e futebol — exatamente nessa ordem.
       </div>
     </main>
-    <footer class="site-footer" id="contato">
-      <div class="footer-main">
-        <div class="footer-brand-block">
-          <a
-            class="footer-brand"
-            href="index.html#inicio"
-            aria-label="Diretoria — voltar ao início"
-            ><img src="logo-diretoria.png" alt="" /><span class="brand-name"
-              >Diretoria<small>Futsal feminino</small></span
-            ></a
-          >
-        </div>
-        <div class="footer-col">
-          <h2>Navegue</h2>
-          <nav class="footer-links" aria-label="Links do rodapé">
-            <a href="index.html#inicio">Início</a
-            ><a href="manifesto/index.html">Manifesto</a
-            ><a href="jogos/index.html">Calendário</a>
-          </nav>
-        </div>
-        <div class="footer-col">
-          <h2>Contato</h2>
-          <div class="footer-contact">
-            <a href="mailto:oi@diretoriaffc.com.br">oi@diretoriaffc.com.br</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h2>Redes sociais</h2>
-          <div class="footer-links">
-            <a
-              class="footer-instagram"
-              href="https://instagram.com/diretoria.ffc/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram da Diretoria"
-              title="Instagram da Diretoria"
-              ><img src="instagram-logo.svg" alt=""
-            /></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 Diretoria Futsal. Todos os direitos reservados.</p>
-      </div>
-    </footer>
+    <diretoria-footer id="contato"></diretoria-footer>
     <dialog class="interest-dialog" aria-labelledby="interest-title">
       <div class="interest-dialog-inner">
         <button class="interest-close" type="button" aria-label="Fechar">
@@ -968,7 +931,7 @@
         </div>
         <form class="interest-form">
           <label
-            >Nome<input
+            >Seu nome<input
               name="name"
               autocomplete="name"
               required
@@ -1060,6 +1023,18 @@
           </button>
           <p class="interest-status" role="status" aria-live="polite"></p>
         </form>
+        <section class="interest-success" aria-live="polite" hidden>
+          <span class="interest-success-mark" aria-hidden="true">✓</span>
+          <h3>Interesse registrado!</h3>
+          <p>
+            Seu interesse foi adicionado à lista. Obrigada por apoiar a
+            Diretoria! Avisaremos pelo WhatsApp quando houver novidades sobre
+            este produto.
+          </p>
+          <button class="interest-success-close" type="button">
+            Voltar à loja
+          </button>
+        </section>
       </div>
     </dialog>
     <iframe
@@ -1070,7 +1045,7 @@
     <script>
       // URL gerada ao implantar o Apps Script como Web App.
       const INTEREST_ENDPOINT =
-        "https://script.google.com/macros/s/AKfycbw0SjhwUgl6HTj0UN8eQGiP7ynjqzBXaBhBPOhgfyZdJje-VTnGiKEHOzxFwVwIcL77/exec";
+        "https://script.google.com/macros/s/AKfycbyvuEW9AY4pvD3dalEk9B-qMB1yUYbkma5zc-n7RBoymQRnKol372Y7NpqeegGxaID4Ug/exec";
       const interestDialog = document.querySelector(".interest-dialog");
       const interestForm = document.querySelector(".interest-form");
       const productField = interestForm.elements.product;
@@ -1083,6 +1058,12 @@
       const previewImage = document.querySelector(".interest-preview-image");
       const previewName = document.querySelector(".interest-preview-name");
       const interestStatus = document.querySelector(".interest-status");
+      const interestTitle = document.querySelector("#interest-title");
+      const interestIntro = document.querySelector(".interest-dialog-intro");
+      const interestSuccess = document.querySelector(".interest-success");
+      const interestProductPreview = document.querySelector(
+        ".interest-product-preview",
+      );
       const submitFrame = document.querySelector(
         '[name="interest-submit-frame"]',
       );
@@ -1091,6 +1072,30 @@
         ...document.querySelectorAll(".product-card[data-product]"),
       ];
       productCards.forEach((card) => {
+        const interestBlock = card.querySelector(".product-interest");
+        const summary = card.querySelector("[data-interest-summary]");
+        summary.textContent = "";
+        const loading = document.createElement("p");
+        loading.className = "product-interest-loading";
+        loading.setAttribute("role", "status");
+        loading.textContent = "Carregando informações…";
+        interestBlock.insertBefore(
+          summary,
+          interestBlock.querySelector(".interest-button"),
+        );
+        interestBlock.insertBefore(loading, summary);
+        const progress = document.createElement("div");
+        progress.className = "product-interest-progress";
+        progress.hidden = true;
+        progress.innerHTML = `
+          <span class="product-interest-count" data-progress-count>0/—</span>
+          <div class="product-interest-track" role="progressbar" aria-label="Pedidos recebidos" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+            <span class="product-interest-fill" data-progress-fill></span>
+          </div>`;
+        interestBlock.insertBefore(
+          progress,
+          interestBlock.querySelector("[data-interest-summary]"),
+        );
         card.querySelector(".interest-button").addEventListener("click", () => {
           productField.value = card.dataset.product;
           previewName.textContent = card.dataset.product;
@@ -1117,11 +1122,19 @@
           });
           interestStatus.textContent = "";
           interestStatus.removeAttribute("data-state");
+          interestTitle.textContent = "Lista de interesse";
+          interestIntro.hidden = false;
+          interestForm.hidden = false;
+          interestSuccess.hidden = true;
+          interestProductPreview.hidden = false;
           interestDialog.showModal();
         });
       });
       document
         .querySelector(".interest-close")
+        .addEventListener("click", () => interestDialog.close());
+      document
+        .querySelector(".interest-success-close")
         .addEventListener("click", () => interestDialog.close());
       interestDialog.addEventListener("click", (event) => {
         if (event.target === interestDialog) interestDialog.close();
@@ -1149,9 +1162,12 @@
           if (received) {
             pendingRequestId = "";
             interestForm.querySelector("[type=submit]").disabled = false;
-            interestStatus.textContent = "Interesse registrado. Obrigada!";
-            interestStatus.dataset.state = "success";
             interestForm.reset();
+            interestTitle.textContent = "Tudo certo!";
+            interestIntro.hidden = true;
+            interestForm.hidden = true;
+            interestSuccess.hidden = false;
+            interestProductPreview.hidden = true;
             loadInterestTotals();
             return;
           }
@@ -1188,6 +1204,33 @@
         interestForm.submit();
         checkSubmissionStatus(pendingRequestId);
       });
+      function renderInterestTotals(totals) {
+        productCards.forEach((card) => {
+          const total = totals[card.dataset.product];
+          if (!total) return;
+          const orders = Number(total.orders ?? total.people) || 0;
+          const minimum = Number(total.minimum) || 0;
+          const progressCount = card.querySelector("[data-progress-count]");
+          const progressTrack = card.querySelector('[role="progressbar"]');
+          const progressFill = card.querySelector("[data-progress-fill]");
+          const summary = card.querySelector("[data-interest-summary]");
+          const progressPercent = minimum
+            ? Math.min(orders / minimum, 1) * 100
+            : 0;
+          progressCount.textContent = `${orders}/${minimum || "—"}`;
+          progressTrack.setAttribute("aria-valuemax", String(minimum || 1));
+          progressTrack.setAttribute(
+            "aria-valuenow",
+            String(Math.min(orders, minimum)),
+          );
+          progressFill.style.width = `${progressPercent}%`;
+          card.querySelector(".product-interest-progress").hidden = false;
+          summary.textContent = minimum
+            ? `Precisamos de pelo menos ${minimum} ${minimum === 1 ? "pedido" : "pedidos"} para viabilizar este produto com o fornecedor.`
+            : "A quantidade mínima de pedidos será definida.";
+          card.querySelector(".product-interest-loading")?.remove();
+        });
+      }
       function loadInterestTotals() {
         if (
           !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(
@@ -1196,26 +1239,26 @@
         )
           return;
         const callback = `interestCallback${Date.now()}`;
-        window[callback] = (totals) => {
+        const showTotalsError = () => {
+          clearTimeout(loadTimeout);
+          delete window[callback];
           productCards.forEach((card) => {
-            const total = totals[card.dataset.product];
-            if (!total) return;
-            const units = Number(total.units) || 0;
-            const people = Number(total.people) || 0;
-            const minimum = Number(total.minimum) || 0;
-            const remaining = Math.max(minimum - units, 0);
-            const summary = card.querySelector("[data-interest-summary]");
-            summary.textContent = minimum
-              ? `${people} ${people === 1 ? "pessoa" : "pessoas"} · ${units} de ${minimum} unidades · faltam ${remaining}`
-              : `${people} ${people === 1 ? "pessoa" : "pessoas"} · ${units} ${units === 1 ? "unidade" : "unidades"} na lista`;
+            const loading = card.querySelector(".product-interest-loading");
+            if (!loading) return;
+            loading.remove();
+            card.querySelector("[data-interest-summary]").textContent =
+              "Não foi possível carregar as informações agora.";
           });
+        };
+        window[callback] = (totals) => {
+          clearTimeout(loadTimeout);
+          renderInterestTotals(totals);
           delete window[callback];
         };
         const script = document.createElement("script");
         script.src = `${INTEREST_ENDPOINT}?action=totals&callback=${callback}`;
-        script.onerror = () => {
-          delete window[callback];
-        };
+        script.onerror = showTotalsError;
+        const loadTimeout = setTimeout(showTotalsError, 30000);
         document.head.append(script);
       }
       loadInterestTotals();
