@@ -1143,7 +1143,7 @@
         progress.hidden = true;
         progress.innerHTML = `
           <span class="product-interest-count" data-progress-count>0/—</span>
-          <div class="product-interest-track" role="progressbar" aria-label="Pedidos recebidos" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+          <div class="product-interest-track" role="progressbar" aria-label="Unidades solicitadas" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
             <span class="product-interest-fill" data-progress-fill></span>
           </div>`;
         interestBlock.insertBefore(
@@ -1280,26 +1280,26 @@
         productCards.forEach((card) => {
           const total = totals[card.dataset.product];
           if (!total) return;
-          const orders = Number(total.orders ?? total.people) || 0;
+          const units = Number(total.units ?? total.orders ?? total.people) || 0;
           const minimum = Number(total.minimum) || 0;
           const progressCount = card.querySelector("[data-progress-count]");
           const progressTrack = card.querySelector('[role="progressbar"]');
           const progressFill = card.querySelector("[data-progress-fill]");
           const summary = card.querySelector("[data-interest-summary]");
           const progressPercent = minimum
-            ? Math.min(orders / minimum, 1) * 100
+            ? Math.min(units / minimum, 1) * 100
             : 0;
-          progressCount.textContent = `${orders}/${minimum || "—"}`;
+          progressCount.textContent = `${units}/${minimum || "—"}`;
           progressTrack.setAttribute("aria-valuemax", String(minimum || 1));
           progressTrack.setAttribute(
             "aria-valuenow",
-            String(Math.min(orders, minimum)),
+            String(Math.min(units, minimum)),
           );
           progressFill.style.width = `${progressPercent}%`;
           card.querySelector(".product-interest-progress").hidden = false;
           summary.textContent = minimum
-            ? `Precisamos de pelo menos ${minimum} ${minimum === 1 ? "pedido" : "pedidos"} para viabilizar este produto com o fornecedor.`
-            : "A quantidade mínima de pedidos será definida.";
+            ? `Precisamos de pelo menos ${minimum} ${minimum === 1 ? "unidade" : "unidades"} para viabilizar este produto com o fornecedor.`
+            : "A quantidade mínima de unidades será definida.";
           card.querySelector(".product-interest-loading")?.remove();
         });
       }
